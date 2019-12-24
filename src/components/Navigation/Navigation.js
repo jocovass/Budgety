@@ -12,7 +12,7 @@ const Navigation = () => {
     return (
         <nav>
             <Ul>
-                <TransitionGroup>
+                <TransitionGroup component={null}>
                     <CSSTransition timeout={10} 
                                    classNames='slide'
                                    in={true} 

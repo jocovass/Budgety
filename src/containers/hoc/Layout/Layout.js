@@ -5,10 +5,10 @@ class Layout extends Component {
 
     render() {
         return (
-            <div>
+            <>
                 <SideBar />
                 <p>MainContent</p>
-            </div>
+            </>
         )
     }
 }
