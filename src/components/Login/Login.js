@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import Button from '../ui/Button/Button';
 import Modal from '../Modal/Modal';
 import LoginForm from '../LoginForm/LoginForm';
@@ -14,11 +15,15 @@ const Login = () => {
       <>
          <Button value="Log in"
                  click={handleClick} />
-         { open ?
-                (<Modal click={handleClick}>
-                    <LoginForm />
-                </Modal>)
-                : null }
+         <CSSTransition timeout={100}
+                            classNames="appear"
+                            in={open}
+                            appear 
+                            unmountOnExit >
+                <Modal click={handleClick} isOpen={open}>
+                        <LoginForm />
+                </Modal>
+        </CSSTransition>
       </>
    );  
 };

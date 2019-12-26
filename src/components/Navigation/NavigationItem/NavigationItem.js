@@ -5,7 +5,7 @@ import sprite from '../../../img/sprite.svg';
 
 const ListItem = styled.li`
     list-style: none;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     transition: all .35s cubic-bezier(0.25, 0.46, 0.75, 1.36);
     
     &.slide-enter, &.slide-appear {

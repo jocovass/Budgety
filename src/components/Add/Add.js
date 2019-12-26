@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import AddButton from './AddButton/AddButton';
 import Modal from '../Modal/Modal';
-import AddNewItemForm from '../AddNewItemForm/AddNewItemForm';
+import NewItemForm from '../NewItemForm/NewItemForm';
 
 const Add = () => {
     const [open, setOpen] = useState(false);
@@ -15,22 +16,17 @@ const Add = () => {
             <AddButton icon='plus' 
                        click={handleClick} 
                        isOpen={open} />
-            { open ?
-                (<Modal click={handleClick}>
-                    <AddNewItemForm />
-                </Modal>)
-                : null }
+            <CSSTransition in={open}
+                           timeout={100}
+                           classNames='appear'
+                           appear
+                           unmountOnExit>
+                <Modal click={handleClick} isOpen={open}>
+                    <NewItemForm />
+                </Modal>
+            </CSSTransition>
         </>
     );
 };
 
 export default Add;
-
-// {({ open, handleClick}) => (
-//     <>
-//         <AddButton icon="plus" 
-//         click={handleClick} 
-//         isOpen={open} />
-//         {open ? <LoginForm value="AddNewItem"/> : null}
-//     </>
-// )}
