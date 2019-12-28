@@ -7,13 +7,14 @@ const Wrapper = styled.div`
     position: fixed;
     top: 50%;
     left: 50%;
-    padding: 2rem;
+    padding: 2.5rem;
+    border-radius: 10px;
     transform: translate(-50%, -500px);
     opacity: 0;
     width: 90%;
-    max-width: 600px;
-    height: 400px;
-    background-color: var(--clr-secondary);
+    max-width: 500px;
+    background-color: var(--clr-bg);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, .4);
     transition: all .3s ease-out;
 
     &.slide-down-enter {
@@ -63,11 +64,16 @@ const Backdrop = styled.div`
     }
 `;
 
-const Modal = ({ children, click, isOpen }) => {
+const Modal = ({ children, close, isOpen }) => {
     const element = typeof children == 'function' ? children()  : children;
+    const handleExitClick = (e) => {
+        if(e.target.dataset.exit === "exit") {
+            close();
+        }
+    } 
 
     return createPortal(
-        <div onClick={click}>
+        <Backdrop  onClick={handleExitClick} data-exit="exit">
             <CSSTransition in={isOpen}
                            timeout={200}
                            classNames='slide-down'
@@ -77,7 +83,7 @@ const Modal = ({ children, click, isOpen }) => {
                     {element}
                 </Wrapper>
             </CSSTransition>
-        </div>,
+        </Backdrop>,
         document.querySelector('.modal')
     )
 };

@@ -2,10 +2,11 @@ const theme = {
     colors: {
         primary: '#28262C',
         secondary: '#FFF',
-        'secondary-light': 'rgba(250,250,250, .6)',
+        'secondary-light': 'rgba(250,250,250, .4)',
         accent: '#5551C1',
         background: '#30027A',
-        OK: '#86CB92',
+        // 'background-light': 'rgba',
+        success: '#86CB92',
         error: '#B3001B',
     },
     mq: {

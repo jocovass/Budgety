@@ -13,14 +13,14 @@ const Login = () => {
 
    return (
       <>
-         <Button value="Log in"
+         <Button value="Login"
                  click={handleClick} />
          <CSSTransition timeout={100}
                             classNames="appear"
                             in={open}
                             appear 
                             unmountOnExit >
-                <Modal click={handleClick} isOpen={open}>
+                <Modal close={handleClick} isOpen={open}>
                         <LoginForm />
                 </Modal>
         </CSSTransition>

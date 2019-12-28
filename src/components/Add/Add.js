@@ -21,7 +21,7 @@ const Add = () => {
                            classNames='appear'
                            appear
                            unmountOnExit>
-                <Modal click={handleClick} isOpen={open}>
+                <Modal close={handleClick} isOpen={open}>
                     <NewItemForm />
                 </Modal>
             </CSSTransition>

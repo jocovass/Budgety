@@ -17,6 +17,8 @@ const makeGlobalStyles = theme => (
             --clr-secondary: ${theme.colors.secondary};
             --clr-secondary-light: ${theme.colors['secondary-light']};
             --clr-accent: ${theme.colors.accent};
+            --clr-error: ${theme.colors.error};
+            --clr-success: ${theme.colors.success};
         }
 
         body {
@@ -29,6 +31,7 @@ const makeGlobalStyles = theme => (
             cursor: pointer;
             border: none;
             outline: none;
+            font-family: 'Roboto Mono', sans-serif;
         }
         `);
 
