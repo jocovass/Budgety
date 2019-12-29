@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import styled from '@emotion/styled';
 import { renderInput } from '../ui/Input/Input';
+import { required, emailCheck, requiredNum, minValue} from '../../utilities/formValidation';
 import Button from '../ui/Button/Button';
 import SignupForm from '../SignupForm/SignupForm';
 
@@ -31,6 +32,7 @@ const InlineBtn = styled.button`
     background-color: ${props => props.active ? `var(--clr-bg)` : `transparent`};
     border-color: ${props => props.active ? `var(--clr-secondary) var(--clr-secondary) var(--clr-bg)` 
                                     : `transparent`};
+    box-shadow: ${props => props.active ? `-5px -5px 10px -4px rgba(0, 0, 0, .5)`: null};
     margin-bottom: -2px;
 `;
 
@@ -45,12 +47,14 @@ const LoginForm = (props) => {
                         label="email"
                         component={renderInput}
                         type="email"
-                        id="email"/>
+                        id="email"
+                        validate={[required, emailCheck]}/>
                     <Field name="password"
                         label="password"
                         component={renderInput}
                         type="password"
-                        id="password"/>
+                        id="password"
+                        validate={[required, requiredNum, minValue]}/>
                     <Row>
                         <Button value="Login" margin="0 2rem 0 0"/>
                         <Button value="Clear" margin="0 2rem 0 0"/>
