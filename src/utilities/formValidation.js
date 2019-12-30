@@ -1,12 +1,27 @@
+export const validate = (values) => {
+    const errors = {};
+    if(!values.name) {
+        errors.name = 'Required.';
+    } else if(values.name.length < 2) {
+        errors.name = 'Too short.';
+    }
+    if(!values.email) {
+        errors.email = 'Required.'
+    } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = 'Invalid email address.';
+    }
+    if(!values.password) {
+        errors.password = 'Required.';
+    } else if(values.password.length < 8) {
+        errors.password = 'Must be 8 characters or more.';
+    } else if(!/[0-9]+/.test(values.password)) {
+        errors.password = 'Must contain atleast one number';
+    }
+    if(!values.confirmPass) {
+        errors.confirmPass = 'Required.';
+    } else if(values.confirmPass !== values.password) {
+        errors.confirmPass = 'Password mismatched.';
+    }
 
-export const required = value => value ? null : 'Required!';
-export const emailCheck = value => {
-    return (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) 
-            ? null
-            : 'Invalid email address!');
-
+    return errors;
 };
-export const minLength = min => value => value.length < min ? `Must be ${min} characters or more!` : null;
-export const minValue = minLength(8);
-export const requiredNum = value => /[0-9]+/.test(value) ? null : 'Must contain atleast one number!';
-export const matchPasswords = val1 => val2 => val1 !== val2 ? 'Password mismatched' : null;

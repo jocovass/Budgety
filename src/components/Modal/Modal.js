@@ -67,7 +67,7 @@ const Backdrop = styled.div`
 const Modal = ({ children, close, isOpen }) => {
     const element = typeof children == 'function' ? children()  : children;
     const handleExitClick = (e) => {
-        if(e.target.dataset.exit === "exit") {
+        if(e.target.dataset.exit === 'exit') {
             close();
         }
     } 
@@ -76,7 +76,7 @@ const Modal = ({ children, close, isOpen }) => {
         <Backdrop  onClick={handleExitClick} data-exit="exit">
             <CSSTransition in={isOpen}
                            timeout={200}
-                           classNames='slide-down'
+                           classNames="slide-down"
                            appear
                            unmountOnExit>
                 <Wrapper>

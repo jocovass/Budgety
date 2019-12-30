@@ -1,54 +1,70 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import styled from '@emotion/styled';
 import { renderInput } from '../ui/Input/Input';
-import { required, emailCheck, requiredNum, minValue, matchPasswords} from '../../utilities/formValidation';
+import { validate } from '../../utilities/formValidation';
+import { createUser } from '../../store/actions/auth';
 import Button from '../ui/Button/Button';
 
 const Form = styled.form`
     width: 90%;
     margin: 0 auto;
-    padding-top: 4rem;
+    padding-top: 6rem;
 `;
 
 const Row = styled.div`
     text-align: center;
-    margin-top: 4rem;
 `;
 
-let SignupForm = ({ passwordVal, handleSubmit }) => {
+const Strong = styled.strong`
+    display: block;
+    text-align: center;
+    color: var(--clr-error);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    width: 100%;
+`;
+
+let SignupForm = ({ handleSubmit, createUser, error, subbmitting, pristine, reset, loading }) => {
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit(createUser)}>
+            {error && <Strong>{error}</Strong>}
             <Field name="name"
                 label="user"
                 component={renderInput}
                 type="text"
-                id="name"
-                validate={required}/>
+                id="name"/>
             <Field name="email"
                 label="email"
                 component={renderInput}
                 type="email"
-                id="email"
-                validate={[required, emailCheck]}/>
+                id="email"/>
             <Field name="password"
                 label="password"
                 component={renderInput}
                 type="password"
-                id="password"
-                validate={[required, requiredNum, minValue]}/>
-            <Field name="repeat-password"
+                id="password"/>
+            <Field name="confirmPass"
                 label="password"
                 component={renderInput}
                 type="password"
-                id="repeat-password"
-                validate={[required, requiredNum, minValue, matchPasswords(passwordVal)]}/>
+                id="repeat-password"/>
+            {loading ? <div>Loading</div> : null}
             <Row>
-                <Button value="Signup" margin="0 2rem 0 0"/>
-                <Button value="Clear" margin="0 2rem 0 0"/>
-                <Button value="Cancel" hoverColor="error"/>
+                <Button value="Login" 
+                        margin="0 2rem 0 0"
+                        disabled={subbmitting} />
+                <Button value="Clear" 
+                        margin="0 2rem 0 0"
+                        disabled={pristine || subbmitting}
+                        click={reset} />
+                <Button value="Cancel" hoverColor="error" data="exit" />
             </Row>
         </Form>
     );
@@ -56,17 +72,14 @@ let SignupForm = ({ passwordVal, handleSubmit }) => {
 
 // decorating our component with redux from 
 SignupForm = reduxForm({
-    form: 'signupForm'
+    form: 'signupForm',
+    validate,
 })(SignupForm);
 
-// I'm using this selector function to get the form value in order to compare to passwords
-const selector = formValueSelector('signupForm');
-
-// Mapping the state from the redux store to the component
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        passwordVal: selector(state, 'password'),
-    }
+        loading: state.auth.loading,
+    };
 };
 
-export default connect(mapStateToProps)(SignupForm);
+export default connect(mapStateToProps, { createUser })(SignupForm);

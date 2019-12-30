@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import styled from '@emotion/styled';
+import { onSignIn } from '../../store/actions/auth';
 import { renderInput } from '../ui/Input/Input';
-import { required, emailCheck, requiredNum, minValue} from '../../utilities/formValidation';
+import { validate } from '../../utilities/formValidation';
 import Button from '../ui/Button/Button';
 import SignupForm from '../SignupForm/SignupForm';
 
 const Form = styled.form`
     width: 90%;
     margin: 0 auto;
-    padding-top: 4rem;
+    padding-top: 6rem;
 `;
     
 const Header = styled.header`
@@ -20,7 +22,6 @@ const Header = styled.header`
 
 const Row = styled.div`
     text-align: center;
-    margin-top: 4rem;
 `;
     
 const InlineBtn = styled.button`
@@ -36,29 +37,47 @@ const InlineBtn = styled.button`
     margin-bottom: -2px;
 `;
 
-const LoginForm = (props) => {
+const Strong = styled.strong`
+    display: block;
+    text-align: center;
+    color: var(--clr-error);
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    width: 100%;
+`;
+
+let LoginForm = ({ handleSubmit, onSignIn, error, subbmitting, pristine, reset, loading }) => {
     const [form, setForm] = useState('login');
 
     function renderForm() {
         if(form === 'login') {
             return (
-                <Form onSubmit={props.handleSubmit}>
+                <Form onSubmit={handleSubmit(onSignIn)}>
+                    {error && <Strong>{error}</Strong>}
                     <Field name="email"
                         label="email"
                         component={renderInput}
                         type="email"
-                        id="email"
-                        validate={[required, emailCheck]}/>
+                        id="email"/>
                     <Field name="password"
                         label="password"
                         component={renderInput}
                         type="password"
-                        id="password"
-                        validate={[required, requiredNum, minValue]}/>
+                        id="password"/>
+                    {loading ? <div>Loading</div>: null}
                     <Row>
-                        <Button value="Login" margin="0 2rem 0 0"/>
-                        <Button value="Clear" margin="0 2rem 0 0"/>
-                        <Button value="Cancel" hoverColor="error"/>
+                        <Button value="Login" 
+                                margin="0 2rem 0 0"
+                                disabled={subbmitting} />
+                        <Button value="Clear" 
+                                margin="0 2rem 0 0"
+                                disabled={pristine || subbmitting}
+                                click={reset} />
+                        <Button value="Cancel" hoverColor="error" data="exit" />
                     </Row>
                 </Form>
             );
@@ -80,6 +99,15 @@ const LoginForm = (props) => {
     );
 };
 
-export default reduxForm({
-    form: 'loginForm'
+LoginForm = reduxForm({
+    form: 'loginForm',
+    validate,
 })(LoginForm);
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.auth.loading,
+    };
+};
+
+export default connect(mapStateToProps, { onSignIn })(LoginForm);

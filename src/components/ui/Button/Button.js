@@ -18,11 +18,13 @@ const Btn = styled.button`
     }
 `;
 
-const Button = ({ value, click, color, hoverColor, margin }) => (
+const Button = ({ value, click, color, hoverColor, margin, data, disabled }) => (
     <Btn onClick={click}
          fontColor={color || 'secondary'}
          hoverColor={hoverColor || 'accent'}
-         margin={margin}>
+         margin={margin}
+         data-exit={data}
+         disabled={disabled}>
         {value}
     </Btn>
 );

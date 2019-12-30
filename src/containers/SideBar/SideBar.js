@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from '@emotion/styled';
+import { app } from '../../config/firebase';
+import { signInSuccees, emailVerified, signOutSuccees } from '../../store/actions/auth';
 import Login from '../../components/Login/Login';
 import Navigation from '../../components/Navigation/Navigation';
 import Add from '../../components/Add/Add';
+import Logout from '../../components/Logout/Logout';
 
 const Wrapper = styled.section`
     position: fixed;
@@ -21,10 +25,49 @@ const Wrapper = styled.section`
 `;
 
 class SideBar extends Component {
+    componentDidMount() {
+        this.removeAuthListener = app.auth().onAuthStateChanged(user => {
+            this.onAuthChange(!!user, user);
+        });
+    }
+
+    componentWillUnmount() {
+        this.removeAuthListener();
+    }
+
+    // Every time the auth state changes this function runs
+    onAuthChange = (signedIn, user) => {
+        if(signedIn) {
+            const userId = user.uid;
+            const userName = user.displayName;
+            user.getIdToken() 
+                .then(token => {
+                    this.props.signInSuccees(userName, userId, token);
+                    if(user.emailVerified) {
+                        this.props.emailVerified();
+                    }
+                    // we have to check the auth state(MISSING)
+                });
+        } else {
+            localStorage.removeItem('expirationDate');
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            this.props.signOutSuccees();
+        }
+    };
+
+    renderBtn() {
+        if(this.props.signedIn) {
+            return <Logout />;
+        } else {
+            return <Login />;
+        }
+    }
+
     render() {
         return (
             <Wrapper>
-                <Login />
+                {this.renderBtn()}
                 <Navigation />
                 <Add />
             </Wrapper>
@@ -32,4 +75,11 @@ class SideBar extends Component {
     }
 }
 
-export default SideBar;
+const mapStateToProps = (state) => {
+    return {
+        signedIn: state.auth.signedIn,
+    };
+};
+
+export default connect(mapStateToProps, 
+                      { signInSuccees, signOutSuccees, emailVerified })(SideBar);
