@@ -6,6 +6,7 @@ import { renderInput } from '../ui/Input/Input';
 import { validate } from '../../utilities/formValidation';
 import { createUser } from '../../store/actions/auth';
 import Button from '../ui/Button/Button';
+import Loader from '../ui/Loader/Loader';
 
 const Form = styled.form`
     width: 90%;
@@ -30,7 +31,7 @@ const Strong = styled.strong`
     width: 100%;
 `;
 
-let SignupForm = ({ handleSubmit, createUser, error, subbmitting, pristine, reset, loading }) => {
+let SignupForm = ({ handleSubmit, createUser, error, submitting, pristine, reset, loading }) => {
 
     return (
         <Form onSubmit={handleSubmit(createUser)}>
@@ -55,14 +56,14 @@ let SignupForm = ({ handleSubmit, createUser, error, subbmitting, pristine, rese
                 component={renderInput}
                 type="password"
                 id="repeat-password"/>
-            {loading ? <div>Loading</div> : null}
+            {loading ? <Loader gapBottom="2" /> : null}
             <Row>
                 <Button value="Login" 
                         margin="0 2rem 0 0"
-                        disabled={subbmitting} />
+                        disabled={submitting} />
                 <Button value="Clear" 
                         margin="0 2rem 0 0"
-                        disabled={pristine || subbmitting}
+                        disabled={pristine || submitting}
                         click={reset} />
                 <Button value="Cancel" hoverColor="error" data="exit" />
             </Row>

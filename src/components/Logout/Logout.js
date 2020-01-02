@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from '@emotion/styled';
 import { onSignOut } from '../../store/actions/auth';
 import Button from '../ui/Button/Button';
 

@@ -165,3 +165,14 @@ export const sendVerificationEmail = () => {
     app.auth().sendVerificationEmail(config)
         .catch(error => console.log(error));
 };
+
+// Send password recovery email to the users email
+export const sendPasswordResetEmail = ({ email }) => dispatch => {
+    return app.auth().sendPasswordResetEmail(email)
+        .catch(error => {
+            throw new SubmissionError({
+                email: 'This email is not registred.',
+                _error: 'Something went wrong.',
+            });
+        });
+};

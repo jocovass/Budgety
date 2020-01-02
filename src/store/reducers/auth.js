@@ -8,7 +8,7 @@ const INITIAL_STAT = {
     error: null,
     loading: false,
     verified: false,
-    signedIn: false,
+    signedIn: null,
 };
 
 const updateState = (state, newState = {}) => {

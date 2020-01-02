@@ -7,6 +7,7 @@ import Login from '../../components/Login/Login';
 import Navigation from '../../components/Navigation/Navigation';
 import Add from '../../components/Add/Add';
 import Logout from '../../components/Logout/Logout';
+import Loader from '../../components/ui/Loader/Loader';
 
 const Wrapper = styled.section`
     position: fixed;
@@ -49,15 +50,14 @@ class SideBar extends Component {
                     // we have to check the auth state(MISSING)
                 });
         } else {
-            localStorage.removeItem('expirationDate');
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId');
             this.props.signOutSuccees();
         }
     };
 
     renderBtn() {
-        if(this.props.signedIn) {
+        if(this.props.signedIn === null) {
+            return <Loader size="5" />
+        } else if(this.props.signedIn) {
             return <Logout />;
         } else {
             return <Login />;

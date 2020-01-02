@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import Button from '../ui/Button/Button';
 import Modal from '../Modal/Modal';
-import LoginForm from '../LoginForm/LoginForm';
+import Forms from '../Forms/Forms';
 
 const Login = () => {
    const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ const Login = () => {
                             appear 
                             unmountOnExit >
                 <Modal close={handleClick} isOpen={open}>
-                        <LoginForm />
+                     <Forms />
                 </Modal>
         </CSSTransition>
       </>
