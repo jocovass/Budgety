@@ -17,7 +17,7 @@ const Title = styled.h1`
 
 const SubTitle = styled.p`
     color: var(--clr-secondary);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
     text-align: center;
 `;
@@ -25,7 +25,7 @@ const SubTitle = styled.p`
 const Form = styled.form`
     width: 90%;
     margin: 0 auto;
-    padding-top: 4.5rem;
+    padding-top: 5rem;
 `;
 
 const Row = styled.div`
@@ -59,20 +59,49 @@ const BackButton = styled.button`
     }
     `;
     
-    const Svg = styled.svg`
+const Svg = styled.svg`
     fill: var(--clr-secondary);
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
 `;
 
-let PassRecoveryForm = ({ handleSubmit, submitting, loading, error, click, sendPasswordResetEmail }) => {
+const Check = styled.svg`
+    width: 2rem;
+    height: 2rem;
+    fill: var(--clr-success);
+    display: inline-block;
+    margin-right: .8rem;
+`;
+
+const EmailApproved = styled.p`
+    font-size: 1.6rem;
+    color: var(--clr-success);
+    display: block;
+    margin-bottom: 1rem;
+    text-align: center;
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+`;
+
+let PassRecoveryForm = ({ handleSubmit, submitting, loading, error, click, sendPasswordResetEmail, submitSucceeded }) => {
     return (
         <>
             <Title>Reset Your Password</Title>
             <SubTitle>Send a recovery email to update your password!</SubTitle>
             <Form onSubmit={handleSubmit(sendPasswordResetEmail)}>
                 {error && <Strong>{error}</Strong>}
+                {submitSucceeded ? <EmailApproved>
+                            <Check role="image" aria-labelledby="desc title">
+                                <use xlinkHref={`${sprite}#icon-check`} ></use>
+                            </Check>
+                            Email has been sent.
+                        </EmailApproved>
+                      : null}
                 <Field name="email"
                     label="email"
                     component={renderInput}
@@ -99,4 +128,10 @@ PassRecoveryForm = reduxForm({
     validate,
 })(PassRecoveryForm);
 
-export default connect(null, { sendPasswordResetEmail })(PassRecoveryForm);
+const mapStateToProps = (state) => {
+    return {
+        loading: state.auth.loading,
+    };
+};
+
+export default connect(mapStateToProps, { sendPasswordResetEmail })(PassRecoveryForm);

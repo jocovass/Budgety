@@ -96,6 +96,24 @@ export const emailVerified = () => (
     }
 );
 
+const passRecoveryStart = () => (
+    {
+        type: actionTypes.PASS_RECOVERY_START,
+        payload: {
+            loading: true,
+        }
+    }
+);
+
+const passRecoveryFinish = () => (
+    {
+        type: actionTypes.PASS_RECOVERY_FINISH,
+        payload: {
+            loading: false,
+        }
+    }
+);
+
 // Create user
 export const createUser = ({ name, email, password }) => dispatch => {
     dispatch(signIn);
@@ -168,7 +186,9 @@ export const sendVerificationEmail = () => {
 
 // Send password recovery email to the users email
 export const sendPasswordResetEmail = ({ email }) => dispatch => {
+    dispatch(passRecoveryStart());
     return app.auth().sendPasswordResetEmail(email)
+        .then(() => dispatch(passRecoveryFinish()))
         .catch(error => {
             throw new SubmissionError({
                 email: 'This email is not registred.',
