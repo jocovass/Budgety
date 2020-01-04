@@ -5,6 +5,7 @@ import { onSignOut } from '../../../store/actions/auth';
 import SideBar from '../../SideBar/SideBar';
 import history from '../../../history';
 import Loader from '../../../components/ui/Loader/Loader';
+import Header from '../../Header/Header';
 
 class Layout extends Component {
     constructor(props) {
@@ -51,6 +52,7 @@ class Layout extends Component {
                                             timeout={this.state.timeout} />
                                      : null}
                 <SideBar />
+                <Header />
             </>
         )
     }
