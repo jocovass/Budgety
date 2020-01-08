@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal';
 import NewItemForm from '../NewItemForm/NewItemForm';
 
 const Add = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     
     const handleClick = () => {
         setOpen(!open);

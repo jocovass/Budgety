@@ -14,16 +14,20 @@ const makeGlobalStyles = theme => (
             font-size: 62%; // set the root fontsize to 10px
             --clr-bg: ${theme.colors.background};
             --clr-primary: ${theme.colors.primary};
+            --clr-primary-light: ${theme.colors['primary-light']};
             --clr-secondary: ${theme.colors.secondary};
             --clr-secondary-light: ${theme.colors['secondary-light']};
             --clr-accent: ${theme.colors.accent};
             --clr-error: ${theme.colors.error};
             --clr-success: ${theme.colors.success};
+            --clr-income: ${theme.colors.income};
+            --clr-expense: ${theme.colors.expense};
         }
 
         body {
             box-sizing: border-box;
-            font-family: 'Roboto Mono', sans-serif;
+            font-family: 'Merriweather', sans-serif;
+            background-color: ${theme.colors['primary-light']};
         }
 
         button {
@@ -31,7 +35,7 @@ const makeGlobalStyles = theme => (
             cursor: pointer;
             border: none;
             outline: none;
-            font-family: 'Roboto Mono', sans-serif;
+            font-family: 'Merriweather', sans-serif;
         }
         `);
 

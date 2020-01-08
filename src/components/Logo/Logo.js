@@ -4,6 +4,7 @@ import logo from '../../img/logo.png';
 
 const H1 = styled.h1`
     margin-left: 6rem;
+    margin-bottom: 5rem;
 `;
 
 const Img = styled.img`

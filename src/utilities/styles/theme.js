@@ -1,11 +1,12 @@
 const theme = {
     colors: {
         primary: '#28262C',
+        'primary-light': '#e6e5e8',
         secondary: '#FFF',
-        'secondary-light': 'rgba(250,250,250, .4)',
         accent: '#5551C1',
+        expense: '#d1069b',
+        income: '#02d1b9',
         background: '#30027A',
-        // 'background-light': 'rgba',
         success: '#86CB92',
         error: '#B3001B',
     },

@@ -9,7 +9,7 @@ import { renderInput } from '../ui/Input/Input';
 import Button from '../ui/Button/Button';
 import Loader from '../ui/Loader/Loader';
 
-const Title = styled.h1`
+const Title = styled.h3`
     color: var(--clr-secondary);
     font-size: 2.1rem;
     text-align: center;

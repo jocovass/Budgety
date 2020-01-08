@@ -5,8 +5,8 @@ import sprite from '../../../img/sprite.svg';
 const Row = styled.div`
     position:relative;
     width: 100%;
-    margin-bottom: 4rem;
-    `;
+    margin-bottom: 3rem;
+`;
     
     const Input = styled.input`
     height: 4.5rem;
@@ -24,8 +24,8 @@ const Row = styled.div`
 const Label = styled.label`
     color: var(--clr-secondary);
     position: absolute;
-    top: 9px;
-    left: 15px;
+    top: 1rem;
+    left: 1.5rem;
 `;
 
 const Svg = styled.svg`
@@ -45,7 +45,7 @@ const InputError = styled.span`
     text-align: center;
 `;
 
-export const renderInput = ({input, type, label, id, meta: {touched, error}}) => {
+const renderInput = ({input, type, label, id, meta: {touched, error}}) => {
     const isError = touched && error ? true : false;
     return (
         <>
@@ -65,3 +65,59 @@ export const renderInput = ({input, type, label, id, meta: {touched, error}}) =>
         </>
     );
 };
+
+const RadioInput = styled.input`
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+
+    &:checked + span::after {
+        display: block;
+    }
+`;
+
+const RadioLabel = styled.label`
+    color: var(--clr-secondary);
+    font-size: 1.5rem;
+    margin-right: 4.5rem;
+    user-select: none;
+    position: relative;
+    cursor: pointer;
+`;
+
+const RadioDot = styled.span`
+    position: absolute;
+    top: 0;
+    right: -2.5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: var(--clr-accent);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .3),
+                inset 0 -1px 1px rgba(255, 255, 255, .3);
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: var(--clr-secondary);
+        display: none;
+    }
+`;
+
+const renderRadioButton = ({ input, type, label, id }) => {
+    return (
+        <RadioLabel htmlFor={label}>{`${input.value}:`}
+            <RadioInput {...input}
+                    type={type}
+                    id={id} />
+            <RadioDot />
+        </RadioLabel>
+    );
+}
+
+export { renderInput, renderRadioButton };
