@@ -26,7 +26,7 @@ const Img = styled.img`
     margin: 6rem auto 0;
 `;
 
-class Income extends Component {
+class Expense extends Component {
 
     renderContent = () => {
         if(!this.props.signedIn) {
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(Income);
+export default connect(mapStateToProps)(Expense);

@@ -1,4 +1,4 @@
-export const validate = (values) => {
+const validate = (values) => {
     const errors = {};
     if(!values.name) {
         errors.name = 'Required.';
@@ -22,6 +22,17 @@ export const validate = (values) => {
     } else if(values.confirmPass !== values.password) {
         errors.confirmPass = 'Password mismatched.';
     }
+    if(!values.money) {
+        errors.money = 'Required.';
+    }
+    if(!values.budget) {
+        errors.budget = 'Required.';
+    }
+    if(!values.select) {
+        errors.select = 'Required.';
+    }
 
     return errors;
 };
+
+export { validate };

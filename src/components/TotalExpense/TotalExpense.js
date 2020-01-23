@@ -23,10 +23,10 @@ const Amount = styled.p`
     color: var(--clr-expense);
 `;
 
-const TotalExpense = () => (
+const TotalExpense = ({ totalExpense = 0 }) => (
     <Wrapper>
         <Title>Total Expense:</Title>
-        <Amount>£ 1.657</Amount>
+        <Amount>£ {totalExpense}</Amount>
     </Wrapper>
 );
 

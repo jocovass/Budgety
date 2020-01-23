@@ -51,14 +51,15 @@ const signOutFail = (error) => (
     }
 );
 
-const signUpSuccees = (userName) => (
-    {
+const signUpSuccees = (userName) => {
+    console.log('signup');
+    return {
         type: actionTypes.SIGN_UP_SUCCEES,
         payload: {
             userName,
         }
     }
-);
+};
 
 export const signInSuccees = (userName, userId, token) => (
     {
@@ -126,7 +127,6 @@ export const createUser = ({ name, email, password }) => dispatch => {
             .then(() => dispatch(signUpSuccees(resp.user.displayName)));
             // 1 Send verification email
             sendVerificationEmail();
-            // 2 set up the expiration date after the account will log out automaticaly
         })
         .catch(error => {
             dispatch(signUpFail(error.message));
@@ -141,9 +141,6 @@ export const createUser = ({ name, email, password }) => dispatch => {
 export const onSignIn = ({ email, password }) => dispatch => {
     dispatch(signIn());
     return app.auth().signInWithEmailAndPassword(email, password)
-        .then(resp => {
-            // we will dispatch a timeout to check our login period
-        })
         .catch(error => {
             dispatch(signInFail());
             let prop = null;

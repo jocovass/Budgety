@@ -5,21 +5,23 @@ const Wrapper = styled.div`
     width: 40%;
     display: inline-block;
     margin: 0 2rem 2rem;
-`;
-
-const Title = styled.p`
+    `;
+    
+    const Title = styled.p`
     font-size: 1.6rem;
     font-weight: 300;
     margin-bottom: 5px;
     text-transform: capitalize;
     margin-left: 2rem;
-`;
-
-const Bar = styled.div`
+    text-transform: capitalize;
+    `;
+    
+    const Bar = styled.div`
     padding: .65rem;
     background-color: rgba(0, 0, 0, .5);
     border-radius: 100px;
     box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+    position: relative;
 `;
 
 const Meter = styled.span`
@@ -34,10 +36,10 @@ const Meter = styled.span`
 
 const Progress = styled.span`
     display: block;
-    width: 40%;
+    width: ${props => props.w}%;
     height: 100%;
     border-radius: 100px;
-    background-color: var(--clr-income);
+    background-color: ${props => props.w.toFixed() < 50 ? `var(--clr-income)` : `var(--clr-expense)`};
     box-shadow: inset 0 2px 9px  rgba(255,255,255,0.3),
                 inset 0 -2px 6px rgba(0,0,0,0.4);
     overflow: hidden;
@@ -47,16 +49,19 @@ const Progress = styled.span`
 const Value = styled.p`
     color: var(--clr-secondary);
     font-size: 1.4rem;
+    position: absolute;
+    top: 6px;
+    left: 50%;
 `;
 
-const CostsItem = () => {
+const CostsItem = ({ name, value }) => {
     return (
         <Wrapper>
-            <Title>Food</Title>
+            <Title>{name}</Title>
             <Bar>
                 <Meter>
-                    <Progress>
-                        <Value>40%</Value>
+                    <Progress w={value}>
+                        <Value>{value === 0 ? `${value}%` : `${value.toFixed(1)}%`}</Value>
                     </Progress>
                 </Meter>
             </Bar>

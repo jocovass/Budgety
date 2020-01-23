@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from '@emotion/styled';
 import TotalBudget from '../TotalBudget/TotalBudget';
 import TtotalIncome from '../TotalIncome/TotalIncome';
@@ -9,14 +10,22 @@ const Wrapper = styled.section`
     justify-content: space-around;
 `;
 
-const Headline = () => {
+const Headline = ({ totalBudget, totalExpense, totalIncome }) => {
     return (
         <Wrapper>
-            <TotalBudget />
-            <TtotalIncome />
-            <TotalExpense />
+            <TotalBudget totalBudget={totalBudget}/>
+            <TtotalIncome totalIncome={totalIncome}/>
+            <TotalExpense totalExpense={totalExpense}/>
         </Wrapper>
     )
 };
 
-export default Headline;
+const mapStateToProps = (state) => {
+    return {
+        totalExpense: state.db.totalExpense,
+        totalIncome: state.db.totalIncome,
+        totalBudget: state.db.totalBudget,
+    };
+};
+
+export default connect(mapStateToProps)(Headline);

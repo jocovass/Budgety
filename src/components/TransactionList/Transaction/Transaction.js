@@ -15,17 +15,17 @@ const Item = styled.li`
 
 const Prefix = styled.span`
     font-size: 300;
-    color: ${props => props.transaction === 'income' ? `var(--clr-income)` : `var(--clr-expense)`}
+    color: ${props => props.transaction === 'Income' ? `var(--clr-income)` : `var(--clr-expense)`}
 `;
 
-const Transaction = ({ value }) => {
+const Transaction = ( {value: { value, name, transaction }} ) => {
 
     return (
         <Item>
-            <Prefix transaction={value.transaction}>
-                {`${value.sign} £${value.value}`}
+            <Prefix transaction={transaction}>
+                {`${transaction === 'Income' ? '+' : '-'} £${value}`}
             </Prefix>
-            {` - ${value.label.toUpperCase()}`}
+            {` - ${name.toUpperCase()}`}
         </Item>
     )
 };

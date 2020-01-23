@@ -15,7 +15,7 @@ const Div = styled.div`
     border-radius: 50%;
     width: ${props => `${props.size}rem`};
     height: ${props => `${props.size}rem`};
-    margin: ${props => `${props.gapTop || 0}rem auto ${props.gapBottom || 0}rem auto`};
+    margin: ${props => `${props.gapTop}rem auto ${props.gapBottom}rem auto`};
     font-size: 10px;
     position: relative;
     border-top: .5rem solid rgba(0, 0, 0, 0.2);
@@ -34,7 +34,7 @@ const Div = styled.div`
 
 `;
 
-const Loader = ({ color = 'secondary', size = '6', gapBottom, gapTop }) => {
+const Loader = ({ color = 'secondary', size = '6', gapBottom = 0, gapTop = 0 }) => {
     return <Div clr={color} 
                 role="loader"
                 size={size}

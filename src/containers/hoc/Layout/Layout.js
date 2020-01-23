@@ -9,6 +9,7 @@ import history from '../../../history';
 import Header from '../../Header/Header';
 import MainContent from '../../MainContent/MainContent';
 import Income from '../../Income/Income';
+import Expense from '../../Expense/Expense';
 import Footer from '../../../components/Footer/Footer';
 
 const Wrapper = styled.div`
@@ -25,24 +26,21 @@ class Layout extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            timeout:1000 * 15 * 1,
+            timeout: 60000 * 15 * 1,
             isTimedOut: false
         };
         this.idleTimer = createRef();
     }
 
     onAction = (e) => {
-        console.log('user did something', e)
         this.setState({isTimedOut: false})
       }
      
     onActive = (e) => {
-        console.log('user is active', e)
         this.setState({isTimedOut: false})
       }
      
     onIdle = (e) => {
-        console.log('user is idle', e)
         const isTimedOut = this.state.isTimedOut
         if (isTimedOut && this.props.signedIn) {
             this.props.onSignOut();
@@ -71,6 +69,7 @@ class Layout extends Component {
                     <Switch>
                         <Route path="/" exact component={MainContent}/>
                         <Route path="/income" component={Income}/>
+                        <Route path="/expense" component={Expense}/>
                     </Switch>
                 </StickyFooter>
                 <Footer />
@@ -82,6 +81,7 @@ class Layout extends Component {
 const mapStateToProps = (state) => {
     return {
         signedIn: state.auth.signedIn,
+        loading: state.db.loading,
     };
 };
 

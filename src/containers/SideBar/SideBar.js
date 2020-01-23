@@ -47,7 +47,6 @@ class SideBar extends Component {
                     if(user.emailVerified) {
                         this.props.emailVerified();
                     }
-                    // we have to check the auth state(MISSING)
                 });
         } else {
             this.props.signOutSuccees();

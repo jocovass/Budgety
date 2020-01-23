@@ -5,7 +5,7 @@ import Modal from '../Modal/Modal';
 import NewItemForm from '../NewItemForm/NewItemForm';
 
 const Add = () => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
     
     const handleClick = () => {
         setOpen(!open);
@@ -22,7 +22,7 @@ const Add = () => {
                            appear
                            unmountOnExit>
                 <Modal close={handleClick} isOpen={open}>
-                    <NewItemForm />
+                    <NewItemForm close={handleClick}/>
                 </Modal>
             </CSSTransition>
         </>

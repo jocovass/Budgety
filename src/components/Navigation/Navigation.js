@@ -17,6 +17,12 @@ const Navigation = () => {
                                    classNames='slide'
                                    in={true} 
                                    appear >
+                        <NavigationItem value="home" to="/" />
+                    </CSSTransition>
+                    <CSSTransition timeout={10} 
+                                   classNames='slide'
+                                   in={true} 
+                                   appear >
                         <NavigationItem value="income" to="income" />
                     </CSSTransition>
                     <CSSTransition timeout={100} 

@@ -23,23 +23,35 @@ const Select = styled.select`
     width: 15rem;
     padding: .7rem 1rem;
     appearance: none;
+    border: 2px solid transparent;
+    border-color: ${props => props.isError ? `var(--clr-error)` : `transparent`};
     border-radius: 10px;
-    background-color: var(--clr-bg);
+    background-color: ${props => props.clr === 'bg' ? `var(--clr-accent)` : `var(--clr-bg)`};
     color: var(--clr-secondary);
     outline: none;
+    text-transform: capitalize;
 `;
 
 const Option = styled.option`
     background-color: red;
 `;
 
-const defaultData = ['2020 Jan', '2020 Feb', '2020 March', '2020 Apr'];
+const InputError = styled.span`
+    color: var(--clr-error);
+    font-size: 1.4rem;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 104%;
+    width: 100%;
+    text-align: center;
+`;
 
-const DropDown = ({ dates }) => {
-    const data = dates || defaultData;
+
+const DropDown = ({ opt, clr = 'secondary', isError, message, ...props}) => {
 
     function renderDates() {
-        return data.map(function createOpt(value, index) {
+        return opt.map(function createOpt(value, index) {
             
             return <Option value={value} key={value}>{value}</Option>;
         });
@@ -48,10 +60,11 @@ const DropDown = ({ dates }) => {
     return (
         <Wrapper>
             <Arrow>&#x025BE;</Arrow>
-            <Select>
-                <Option value="">All</Option>
+            <Select clr={clr} {...props} isError={isError}>
+                <Option value="">Select ...</Option>
                 {renderDates()}
             </Select>
+            {isError ? <InputError>{message}</InputError> : null}
         </Wrapper>
     );
 };

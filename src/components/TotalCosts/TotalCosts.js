@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from '@emotion/styled';
 import CostsItem from '../CostsItem/CostsItem';
 
@@ -11,20 +12,31 @@ const Wrapper = styled.div`
     width: 97%;
 `;
 
-const TotalCosts = () => {
+const TotalCosts = ({ totalCosts, totalExpense }) => {
+
+    function countPercentage(value) {
+        return (100 * value) / totalExpense || 0;
+    }
 
     return (
         <Wrapper>
-            <CostsItem />
-            <CostsItem />
-            <CostsItem />
-            <CostsItem />
-            <CostsItem />
-            <CostsItem />
-            <CostsItem />
-            <CostsItem />
+            <CostsItem name="groceries" value={countPercentage(totalCosts.groceries)}/>
+            <CostsItem name="bill" value={countPercentage(totalCosts.bill)} />
+            <CostsItem name="rent" value={countPercentage(totalCosts.rent)} />
+            <CostsItem name="entertainment" value={countPercentage(totalCosts.entertainment)} />
+            <CostsItem name="holiday" value={countPercentage(totalCosts.holiday)} />
+            <CostsItem name="beautycare" value={countPercentage(totalCosts.beautycare)} />
+            <CostsItem name="pet" value={countPercentage(totalCosts.pet)} />
+            <CostsItem name="facilities" value={countPercentage(totalCosts.facilities)} />
         </Wrapper>
     );
 };
 
-export default TotalCosts;
+const mapStateToProps = (state) => {
+    return {
+        totalCosts: state.db.totalCosts,
+        totalExpense: state.db.totalExpense,
+    };
+};
+
+export default connect(mapStateToProps)(TotalCosts);

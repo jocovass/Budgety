@@ -1,63 +1,107 @@
-import React, { PureComponent } from 'react';
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
-} from 'recharts';
+import React from 'react';
+import { ResponsiveBar } from '@nivo/bar'
+import Loader from '../ui/Loader/Loader';
 
-const data = [
-  {
-    name: 'Jan', Income: 4000, Expense: 2400, amt: 2400,
-  },
-  {
-    name: 'Feb', Income: 3000, Expense: 1398, amt: 2210,
-  },
-  {
-    name: 'March', Income: 2000, Expense: 9800, amt: 2290,
-  },
-  {
-    name: 'April', Income: 2780, Expense: 3908, amt: 2000,
-  },
-  {
-    name: 'May', Income: 1890, Expense: 4800, amt: 2181,
-  },
-  {
-    name: 'June', Income: 2390, Expense: 3800, amt: 2500,
-  },
-  {
-    name: 'July', Income: 3490, Expense: 4300, amt: 2100,
-  },
-  {
-    name: 'August', Income: 3490, Expense: 4300, amt: 2100,
-  },
-  {
-    name: 'Sept', Income: 3490, Expense: 4300, amt: 2100,
-  },
-  {
-    name: 'Okt', Income: 3490, Expense: 4300, amt: 2100,
-  },
-  {
-    name: 'Nov', Income: 3490, Expense: 4300, amt: 2100,
-  },
-  {
-    name: 'Dec', Income: 3490, Expense: 4300, amt: 2100,
-  },
-];
+const ChartLine = ({ data, year }) => {
+  if(data === null) return <Loader color='bg'
+                                size='8'
+                                gapTop='10'/>;
 
-export default class Example extends PureComponent {
-
-  render() {
-    return (
-    <ResponsiveContainer width="100%" 
-                         height={400}>
-        <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="Income" stroke="#02d1b9" activeDot={{ r: 8 }} />
-            <Line type="monotone" dataKey="Expense" stroke="#d1069b" />
-        </LineChart>
-    </ResponsiveContainer>
-    );
-  }
+  return (
+    <ResponsiveBar
+        data={data[year] || []}
+        keys={[ 'Income', 'Expense' ]}
+        indexBy="Budget"
+        margin={{ top: 0, right: 130, bottom: 50, left: 60 }}
+        padding={0.4}
+        groupMode="grouped"
+        layout="vertical"
+        colors={['#08964f', '#bf0146']}
+        defs={[
+            {
+                id: 'dots',
+                type: 'patternDots',
+                background: 'inherit',
+                color: '#38bcb2',
+                size: 4,
+                padding: 1,
+                stagger: true
+            },
+            {
+                id: 'lines',
+                type: 'patternLines',
+                background: 'inherit',
+                color: '#eed312',
+                rotation: -45,
+                lineWidth: 6,
+                spacing: 10
+            }
+        ]}
+        fill={[
+            {
+                match: {
+                    id: 'fries'
+                },
+                id: 'dots'
+            },
+            {
+                match: {
+                    id: 'sandwich'
+                },
+                id: 'lines'
+            }
+        ]}
+        borderColor={{ from: 'color', modifiers: [ [ 'darker', '1.5' ] ] }}
+        axisTop={null}
+        axisRight={null}
+        axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: 'Budget Summary',
+            legendPosition: 'middle',
+            legendOffset: 38
+        }}
+        axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: '',
+            legendPosition: 'middle',
+            legendOffset: -40
+        }}
+        labelSkipWidth={12}
+        labelSkipHeight={12}
+        labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
+        legends={[
+            {
+                dataFrom: 'keys',
+                anchor: 'bottom-right',
+                direction: 'column',
+                justify: false,
+                translateX: 120,
+                translateY: 0,
+                itemsSpacing: 2,
+                itemWidth: 100,
+                itemHeight: 20,
+                itemDirection: 'left-to-right',
+                itemOpacity: 0.85,
+                symbolSize: 20,
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemOpacity: 1
+                        }
+                    }
+                ]
+            }
+        ]}
+        animate={true}
+        motionStiffness={90}
+        motionDamping={15}
+    />)
 }
+
+
+export default ChartLine;

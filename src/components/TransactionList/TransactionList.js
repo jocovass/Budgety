@@ -1,57 +1,40 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Transaction from './Transaction/Transaction';
-
-const data = [
-    {
-      "id": "hack",
-      "label": "hack",
-      "value": 368,
-      "color": "hsl(39, 70%, 50%)",
-      "transaction": "income",
-      "sign": "+",
-    },
-    {
-      "id": "ruby",
-      "label": "ruby",
-      "value": 531,
-      "color": "hsl(272, 70%, 50%)",
-      "transaction": "income",
-      "sign": "+",
-    },
-    {
-      "id": "lisp",
-      "label": "lisp",
-      "value": 60,
-      "color": "hsl(24, 70%, 50%)",
-      "transaction": "expanse",
-      "sign": "-",
-    },
-    {
-      "id": "java",
-      "label": "java",
-      "value": 379,
-      "color": "hsl(43, 70%, 50%)",
-      "transaction": "expanse",
-      "sign": "-",
-    },
-    {
-      "id": "erlang",
-      "label": "erlang",
-      "value": 98,
-      "color": "hsl(134, 70%, 50%)",
-      "transaction": "expanse",
-      "sign": "-",
-    }
-  ];
+import notFound from '../../img/notfound.svg';
 
 const List = styled.ul`
   list-style: none;
 `;
 
-const TransactionList = () => {
+const Svg = styled.img`
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+`;
+
+const NotFoundWrapp = styled.div`
+    margin: 5rem auto 0;
+    width: 80%;
+`;
+
+const Message = styled.p`
+    font-size: 1.4rem;
+    text-align: center;
+`;
+
+const TransactionList = ({ recentActivities }) => {
     function renderList() {
-        return data.map((val, index) => {
+      if(recentActivities.length === 0) {
+        return (
+            <NotFoundWrapp>
+                <Svg src={notFound} />
+                <Message>No transactions...</Message>
+            </NotFoundWrapp>
+        );
+      }
+
+      return recentActivities.map((val, index) => {
             return <Transaction value={val} key={val.id} />
         });
     }

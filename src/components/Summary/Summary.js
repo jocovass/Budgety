@@ -1,7 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from '@emotion/styled';
-import DropDown from '../ui/DropDown/DropDown';
-import ChartLine from '../Chart/ChartLine';
 
 const Wrapper = styled.section`
     position: relative;
@@ -13,27 +12,20 @@ const Wrapper = styled.section`
     box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
 `;
 
-const Title = styled.h3`
-    font-size: 2.5rem;
-    text-align: center;
-`;
-
-const ChartWrapp = styled.div`
-    width: 80%;
-    margin: 5rem auto 1rem;
-`;
-
-const Summary = () => {
+const Summary = ({ children, years, selectedYear }) => {
 
     return (
         <Wrapper>
-            <Title>Summary Of Your Balance</Title>
-            <DropDown />
-            <ChartWrapp>
-                <ChartLine />
-            </ChartWrapp>
+            {children(years, selectedYear)}
         </Wrapper>
     );
 };
 
-export default Summary;
+const mapStateToProps = (state) => {
+    return {
+      years: state.db.years,
+      selectedYear: state.db.selectedYear,
+    };
+  };
+
+export default connect(mapStateToProps)(Summary);
