@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect }  from 'react-redux';
 import styled from '@emotion/styled';
 import TransactionList from '../TransactionList/TransactionList';
 
@@ -18,20 +17,13 @@ const Title = styled.h4`
     margin-bottom: 3rem;
 `;
 
-const RecentActivities = ({ recentActivities }) => {
-
+const RecentActivities = ({ data }) => {
     return (
         <Wrapper>
             <Title>Recent Activites:</Title>
-            <TransactionList recentActivities={recentActivities.slice(0, 10)} />
+            <TransactionList recentActivities={data.slice(0, 9)} />
         </Wrapper>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        recentActivities: state.db.recentActivities,
-    };
-};
-
-export default connect(mapStateToProps)(RecentActivities);
+export default RecentActivities;

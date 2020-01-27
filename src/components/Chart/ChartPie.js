@@ -1,49 +1,21 @@
 import React from 'react';
 import { ResponsivePie } from '@nivo/pie'
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
 
-const data = [
-    {
-      "id": "hack",
-      "label": "hack",
-      "value": 368,
-      "color": "hsl(39, 70%, 50%)"
-    },
-    {
-      "id": "ruby",
-      "label": "ruby",
-      "value": 531,
-      "color": "hsl(272, 70%, 50%)"
-    },
-    {
-      "id": "lisp",
-      "label": "lisp",
-      "value": 60,
-      "color": "hsl(24, 70%, 50%)"
-    },
-    {
-      "id": "java",
-      "label": "java",
-      "value": 379,
-      "color": "hsl(43, 70%, 50%)"
-    },
-    {
-      "id": "erlang",
-      "label": "erlang",
-      "value": 98,
-      "color": "hsl(134, 70%, 50%)"
+function formateData(data) {
+  return Object.entries(data).map((val, index) => {
+    return {
+      id: val[0],
+      label: val[0],
+      value: val[1],
     }
-  ];
+  });
+}
 
-const Chart = () => (
+const Chart = ({ data }) => (
     <ResponsivePie
-        data={data}
+        data={formateData(data)}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-        sortByValue={true}
+        sortByValue={false}
         innerRadius={0.4}
         padAngle={1}
         cornerRadius={7}
@@ -65,12 +37,13 @@ const Chart = () => (
         legends={[
             {
                 anchor: 'bottom',
-                direction: 'row',
+                direction: 'column',
                 translateY: 56,
+                translateX: -230,
                 itemWidth: 100,
                 itemHeight: 18,
                 itemTextColor: '#999',
-                symbolSize: 25,
+                symbolSize: 14,
                 symbolShape: 'circle',
                 effects: [
                     {

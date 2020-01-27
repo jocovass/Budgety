@@ -6,6 +6,7 @@ import RecentActivities from '../../components/RecentActivities/RecentActivities
 import TotalCosts from '../../components/TotalCosts/TotalCosts';
 import ChartLine from '../../components/Chart/ChartLine';
 import Advert from '../../components/Advert/Advert';
+import DropDown from '../../components/ui/DropDown/DropDown';
 
 
 const Wrapper = styled.main`
@@ -21,7 +22,7 @@ const FlexRow = styled.div`
 
 const Title = styled.h3`
     font-size: 2.5rem;
-    text-align: center;
+    margin: 0 0 3rem 5rem;
 `;
 
 const ChartWrapp = styled.div`
@@ -29,6 +30,12 @@ const ChartWrapp = styled.div`
     height: 500px;
     margin: 1rem auto;
 `;
+
+function formData(data) {
+    const d = data || {};
+
+    return Object.keys(d);
+}
 
 class MainContent extends Component {
     renderContent = () => {
@@ -39,32 +46,31 @@ class MainContent extends Component {
         }
 
         return (
-            <>
+            <FlexRow>
                 <Summary>
                     {
-                    (data, year) => {
+                    () => {
                         return (
                             <>
                                 <Title>Summary Of Your Balance</Title>
+                                <DropDown opt={formData(this.props.years)}/>
                                 <ChartWrapp>
-                                    <ChartLine data={data} year={year} />
+                                    <ChartLine data={this.props.years} year={this.props.selectedYear} />
                                 </ChartWrapp>
                             </>
                         )
                     }
                     }
                 </Summary>
-                <RecentActivities />
-            </>
+                <RecentActivities data={this.props.recentActivities || []} />
+            </FlexRow>
         )
     }
 
     render() {
         return (
             <Wrapper>
-                <FlexRow>
-                    {this.renderContent()}
-                </FlexRow>
+                {this.renderContent()}
                 <TotalCosts />
             </Wrapper>
         )
@@ -74,6 +80,9 @@ class MainContent extends Component {
 const mapStateToProps = (state) => {
     return {
         signedIn: state.auth.signedIn,
+        years: state.db.years,
+        selectedYear: state.db.selectedYear,
+        recentActivities: state.db.recentActivities,
     };
 };
 

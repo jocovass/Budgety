@@ -4,12 +4,12 @@ import styled from '@emotion/styled';
 const Item = styled.li`
     font-size: 1.6rem;
     color: var(--clr-primary);
-    // background-color: var(--clr-accent);
     padding: 1rem;
     margin-bottom: 1rem;
-    
+    text-transform: capitalize;
+
     &:not(:last-child) {
-        border-bottom: 1px solid var(--clr-accent);
+        border-bottom: 2px solid rgba(0,0,0,.1);
     }
 `;
 
@@ -25,7 +25,7 @@ const Transaction = ( {value: { value, name, transaction }} ) => {
             <Prefix transaction={transaction}>
                 {`${transaction === 'Income' ? '+' : '-'} £${value}`}
             </Prefix>
-            {` - ${name.toUpperCase()}`}
+            {` - ${name}`}
         </Item>
     )
 };

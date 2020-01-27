@@ -11,6 +11,7 @@ import MainContent from '../../MainContent/MainContent';
 import Income from '../../Income/Income';
 import Expense from '../../Expense/Expense';
 import Footer from '../../../components/Footer/Footer';
+import AllTransactions from '../../AllTransactions/AllTransactions';
 
 const Wrapper = styled.div`
     max-width: 1600px;
@@ -70,6 +71,7 @@ class Layout extends Component {
                         <Route path="/" exact component={MainContent}/>
                         <Route path="/income" component={Income}/>
                         <Route path="/expense" component={Expense}/>
+                        <Route path="/transactions" component={AllTransactions}/>
                     </Switch>
                 </StickyFooter>
                 <Footer />

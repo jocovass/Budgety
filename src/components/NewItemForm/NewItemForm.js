@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from '@emotion/styled';
-import { Field, reduxForm, SubmissionError } from 'redux-form';
+import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form';
 import uuid from 'uuid'
 import { renderInput, renderRadioButton, renderDropdown } from '../ui/Input/Input';
 import { validate } from '../../utilities/formValidation';
@@ -96,8 +96,8 @@ function calcSummary(data, years, time) {
     return y;
 }
 
-let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appState, close, userId, error }) => {
-
+let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appState, close, userId, error, transaction }) => {
+    const [select, setSelect] = useState('Income');
     const onSubmit = (data) => {
         if(userId) {
             const currentTime = new Date();
@@ -128,7 +128,9 @@ let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appSt
             <Title>Add a new item</Title>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 {error && <Strong>{error}</Strong>}
-                <Field name="select" component={renderDropdown} initialValues={{select: 'gift'}} />
+                <Field name="select" 
+                    component={renderDropdown}
+                    select={select} />
                 <Field name="money"
                        label="money"
                        component={renderInput}
@@ -140,13 +142,18 @@ let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appSt
                         component={renderRadioButton}
                         type="radio"
                         id="income"
-                        value="Income"/>
+                        value="Income"
+                        checked={select === 'Income'}
+                        setSelect={setSelect}
+                        initVal={select} />
                     <Field name="transaction"
                         label="expense"
                         component={renderRadioButton}
                         type="radio"
                         id="expense"
-                        value="Expense"/>
+                        value="Expense"
+                        checked={select === 'Expense'}
+                        setSelect={setSelect}/>
                 </Row>
                 <Row>
                     <Button value="Add" 
@@ -166,9 +173,9 @@ let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appSt
 NewItemForm = reduxForm({
     form: 'newItemForm',
     validate,
-    enableReinitialize: true,
-    keepDirtyOnReinitialize: true, 
 })(NewItemForm);
+
+const selector = formValueSelector('newItemForm');
 
 const mapStateToProps = (state) => {
     return {
@@ -180,6 +187,12 @@ const mapStateToProps = (state) => {
             totalCosts: state.db.totalCosts,
             recentActivities: state.db.recentActivities,
             years: state.db.years,
+        },
+        transaction: selector(state, 'transaction'),
+        initialValues: {
+            select: '',
+            money: '',
+            transaction: 'Income',
         }
     }
 }

@@ -110,25 +110,37 @@ const RadioDot = styled.span`
     }
 `;
 
-const renderRadioButton = ({ input, type, label, id, meta: { touched, error } }) => {
+const renderRadioButton = ({ input, setSelect, checked, type, label, id, meta: { touched, error } }) => {
     const isError = touched && error ? true : false;
-
     return (
         <RadioLabel htmlFor={label}>{`${input.value}:`}
             <RadioInput {...input}
                     type={type}
-                    id={id} />
+                    id={id}
+                    checked={checked}
+                    onClick={() => setSelect(input.value)}/>
             <RadioDot error={isError}/>
         </RadioLabel>
     );
 };
 
-const dropdownOpt = ['salary', 'gift', 'win', 'groceries', 'rent', 'holiday', 'pet', 'bill', 'entertainment', 'beautycare', 'facilities'];
+const incomes = ['salary', 'gift', 'win'];
+const expenses = ['groceries', 'rent', 'holiday', 'pet', 'bill', 'entertainment', 'beautycare', 'facilities'];
 
-const renderDropdown = ({ input, type, label, id, meta: { touched, error } }) => {
+const renderDropdownOpt = (select) => {
+    if(select === 'Income') {
+        return incomes;
+    } else if(select === 'Expense') {
+        return expenses
+    } else {
+        return incomes.concat(expenses);
+    }
+}
+
+const renderDropdown = ({ input, select, meta: { touched, error } }) => {
     const isError = touched && error ? true : false;
 
-    return <DropDown {...input} clr="bg" opt={dropdownOpt} isError={isError} message={error} />
+    return <DropDown {...input} clr="bg" opt={renderDropdownOpt(select)} isError={isError} message={error} />
 }
 
 export { renderInput, renderRadioButton, renderDropdown };

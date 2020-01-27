@@ -35,7 +35,7 @@ const Navigation = () => {
                                    classNames='slide' 
                                    in={true}
                                    appear >
-                        <NavigationItem value="calendar" to="calendar" />
+                        <NavigationItem value="calendar" to="transactions" />
                     </CSSTransition>
                 </TransitionGroup>
             </Ul>

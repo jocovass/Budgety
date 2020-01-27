@@ -172,12 +172,12 @@ export const onSignOut = () => dispatch => {
 };
 
 // Send verification email to the user
-export const sendVerificationEmail = () => {
+export const sendVerificationEmail = () => dispatch => {
     const config = {
         url: `${process.env.PUBLIC_URL}/?email=${app.auth().currentUser.email}`,
         handleCodeInApp: true,
     };
-    app.auth().sendVerificationEmail(config)
+    app.auth().currentUser.sendEmailVerification(config)
         .catch(error => console.log(error));
 };
 

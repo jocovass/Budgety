@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import styled from '@emotion/styled';
 
 const Wrapper = styled.section`
@@ -12,20 +11,13 @@ const Wrapper = styled.section`
     box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
 `;
 
-const Summary = ({ children, years, selectedYear }) => {
+const Summary = ({ children }) => {
 
     return (
         <Wrapper>
-            {children(years, selectedYear)}
+            {children()}
         </Wrapper>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-      years: state.db.years,
-      selectedYear: state.db.selectedYear,
-    };
-  };
-
-export default connect(mapStateToProps)(Summary);
+export default Summary;

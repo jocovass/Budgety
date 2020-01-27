@@ -6,6 +6,11 @@ const INITIAL_STATE = {
     totalBudget: 0,
     totalIncome: 0,
     totalExpense: 0,
+    totalIncomes: {
+        salary: 2296,
+        gift: 2,
+        win: 430,
+    },
     totalCosts: {
         groceries: 0,
         pet: 0,
@@ -16,7 +21,7 @@ const INITIAL_STATE = {
         beautycare: 0,
         facilities: 0,
     },
-    recentActivities: [],
+    recentActivities: null,
     years: null,
     error: null,
     selectedYear: '2020',

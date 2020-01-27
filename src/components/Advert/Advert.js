@@ -5,12 +5,7 @@ import chartSvg from '../../img/chart.svg';
 const Wrapper = styled.section`
     position: relative;
     flex: 1;
-    background-color: var(--clr-secondary);
-    border-radius: 10px;
-    padding: 2rem 1rem;
-    margin: 0 1rem;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
-    `;
+`;
 
 const Header = styled.header`
     margin-bottom: 3rem;
