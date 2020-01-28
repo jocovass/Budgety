@@ -50,7 +50,7 @@ function selectExpenses(data) {
 
 class Expense extends Component {
     renderContent = () => {
-        if(!this.props.signedIn) {
+        if(!this.props.signedIn || this.props.recentActivities.length === 0) {
             return (
                 <>
                     <Img src={empty} alt="Empty illustration" />
@@ -67,7 +67,8 @@ class Expense extends Component {
                                     <>
                                         <Title>Summary Of Your Expenses</Title>
                                         <ChartWrapp>
-                                            <ChartPie data={this.props.totalCosts}/>
+                                            <ChartPie data={this.props.totalCosts}
+                                            loading={this.props.loading}/>
                                         </ChartWrapp>
                                     </>
                                 )
@@ -90,6 +91,7 @@ const mapStateToProps = (state) => {
         signedIn: state.auth.signedIn,
         totalCosts: state.db.totalCosts,
         recentActivities: state.db.recentActivities,
+        loader: state.db.loader,
     };
 };
 

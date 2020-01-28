@@ -58,7 +58,7 @@ let SignupForm = ({ handleSubmit, createUser, error, submitting, pristine, reset
                 id="repeat-password"/>
             {loading ? <Loader gapBottom="2" /> : null}
             <Row>
-                <Button value="Login" 
+                <Button value="Signup" 
                         margin="0 2rem 0 0"
                         disabled={submitting} />
                 <Button value="Clear" 

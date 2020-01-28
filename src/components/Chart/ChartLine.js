@@ -2,8 +2,8 @@ import React from 'react';
 import { ResponsiveBar } from '@nivo/bar'
 import Loader from '../ui/Loader/Loader';
 
-const ChartLine = ({ data, year }) => {
-  if(data === null) return <Loader color='bg'
+const ChartLine = ({ data, year, loading }) => {
+  if(loading) return <Loader color='bg'
                                 size='8'
                                 gapTop='10'/>;
 

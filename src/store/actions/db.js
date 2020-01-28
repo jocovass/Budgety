@@ -10,9 +10,9 @@ const getUserData = () => (
     }
 );
 
-const getUserDataSuccees = (data) => (
+const getUserDataSuccess = (data) => (
     {
-        type: actionTypes.GET_USER_DATA_SUCCEES,
+        type: actionTypes.GET_USER_DATA_SUCCESS,
         payload: {
             loading: false,
             ...data
@@ -39,9 +39,9 @@ const addItem = () => (
     }
 );
 
-const addItemSuccees = () => (
+const addItemSuccess = () => (
     {
-        type: actionTypes.ADD_ITEM_SUCCEES,
+        type: actionTypes.ADD_ITEM_SUCCESS,
         payload: {
             loading: false,
             error: false,
@@ -91,7 +91,7 @@ export const listenForUserData = (userId) => (dispatch) => {
     const userRef = db.collection('users').doc(userId);
     return userRef.onSnapshot(
         (doc) => {
-            dispatch(getUserDataSuccees(doc.data()));
+            dispatch(getUserDataSuccess(doc.data()));
         }, (error) => dispatch(getUserDataFail(error))
     );
 };
@@ -102,6 +102,6 @@ export const onAddItem = (data, userId) => (dispatch) => {
 
     const userRef = db.collection('users').doc(userId);
     userRef.set(data, { merge: true })
-        .then(resp => dispatch(addItemSuccees()))
+        .then(resp => dispatch(addItemSuccess()))
         .catch(error => dispatch(addItemFail(error)));
 }

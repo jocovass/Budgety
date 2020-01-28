@@ -99,6 +99,7 @@ function calcSummary(data, years, time) {
 let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appState, close, userId, error, transaction }) => {
     const [select, setSelect] = useState('Income');
     const onSubmit = (data) => {
+        console.log(data)
         if(userId) {
             const currentTime = new Date();
             const totals = calcTotals(data, appState);

@@ -1,5 +1,6 @@
 import React from 'react';
-import { ResponsivePie } from '@nivo/pie'
+import { ResponsivePie } from '@nivo/pie';
+import Loader from '../ui/Loader/Loader';
 
 function formateData(data) {
   return Object.entries(data).map((val, index) => {
@@ -11,7 +12,12 @@ function formateData(data) {
   });
 }
 
-const Chart = ({ data }) => (
+const Chart = ({ data, loading }) => {
+    if(loading) return <Loader color='bg'
+                                size='8'
+                                gapTop='10'/>;
+
+    return (
     <ResponsivePie
         data={formateData(data)}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -56,6 +62,7 @@ const Chart = ({ data }) => (
             }
         ]}
     />
-);
+    );
+}
 
 export default Chart;

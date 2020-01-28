@@ -51,19 +51,19 @@ const signOutFail = (error) => (
     }
 );
 
-const signUpSuccees = (userName) => {
+const signUpSuccess = (userName) => {
     console.log('signup');
     return {
-        type: actionTypes.SIGN_UP_SUCCEES,
+        type: actionTypes.SIGN_UP_SUCCESS,
         payload: {
             userName,
         }
     }
 };
 
-export const signInSuccees = (userName, userId, token) => (
+export const signInSuccess = (userName, userId, token) => (
     {
-        type: actionTypes.SIGN_IN_SUCCEES,
+        type: actionTypes.SIGN_IN_SUCCESS,
         payload: {
             userName, 
             userId, 
@@ -74,9 +74,9 @@ export const signInSuccees = (userName, userId, token) => (
     }
 );
 
-export const signOutSuccees = () => (
+export const signOutSuccess = () => (
     {
-        type: actionTypes.SIGN_OUT_SUCCEES,
+        type: actionTypes.SIGN_OUT_SUCCESS,
         payload: {
             userName: null,
             userId: null,
@@ -124,7 +124,7 @@ export const createUser = ({ name, email, password }) => dispatch => {
             resp.user.updateProfile({
                 displayName: name,
             })
-            .then(() => dispatch(signUpSuccees(resp.user.displayName)));
+            .then(() => dispatch(signUpSuccess(resp.user.displayName)));
             // 1 Send verification email
             sendVerificationEmail();
         })
@@ -166,7 +166,7 @@ export const onSignOut = () => dispatch => {
     return app.auth().signOut()
         .then(resp => {
             history.replace('/');
-            dispatch(signOutSuccees());
+            dispatch(signOutSuccess());
         })
         .catch(error => dispatch(signOutFail(error.message)));
 };
@@ -187,6 +187,7 @@ export const sendPasswordResetEmail = ({ email }) => dispatch => {
     return app.auth().sendPasswordResetEmail(email)
         .then(() => dispatch(passRecoveryFinish()))
         .catch(error => {
+            dispatch(passRecoveryFinish());
             throw new SubmissionError({
                 email: 'This email is not registred.',
                 _error: 'Something went wrong.',

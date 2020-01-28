@@ -55,14 +55,16 @@ class MainContent extends Component {
                                 <Title>Summary Of Your Balance</Title>
                                 <DropDown opt={formData(this.props.years)}/>
                                 <ChartWrapp>
-                                    <ChartLine data={this.props.years} year={this.props.selectedYear} />
+                                    <ChartLine data={this.props.years} 
+                                    year={this.props.selectedYear}
+                                    loading={this.props.loading} />
                                 </ChartWrapp>
                             </>
                         )
                     }
                     }
                 </Summary>
-                <RecentActivities data={this.props.recentActivities || []} />
+                <RecentActivities data={this.props.recentActivities} />
             </FlexRow>
         )
     }
@@ -83,6 +85,7 @@ const mapStateToProps = (state) => {
         years: state.db.years,
         selectedYear: state.db.selectedYear,
         recentActivities: state.db.recentActivities,
+        loading: state.db.loading,
     };
 };
 

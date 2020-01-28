@@ -21,8 +21,8 @@ const INITIAL_STATE = {
         beautycare: 0,
         facilities: 0,
     },
-    recentActivities: null,
-    years: null,
+    recentActivities: [],
+    years: {},
     error: null,
     selectedYear: '2020',
 };
@@ -34,7 +34,7 @@ const updateState = (state, newState) => {
 const dbReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case actionTypes.GET_USER_DATA: return updateState(state, action.payload);
-        case actionTypes.GET_USER_DATA_SUCCEES: return updateState(state, action.payload);
+        case actionTypes.GET_USER_DATA_SUCCESS: return updateState(state, action.payload);
         case actionTypes.GET_USER_DATA_FAIL: return updateState(state, action.payload);
         case actionTypes.EMPTY_APP_STATE: return updateState(state, action.payload);
         default: return state;

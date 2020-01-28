@@ -50,7 +50,7 @@ function selectIncomes(data) {
 
 class Income extends Component {
     renderContent = () => {
-        if(!this.props.signedIn) {
+        if(!this.props.signedIn || this.props.recentActivities.length === 0) {
             return (
                 <>
                     <Img src={empty} alt="Empty illustration" />
@@ -67,7 +67,8 @@ class Income extends Component {
                                     <>
                                         <Title>Summary Of Your Incomes</Title>
                                         <ChartWrapp>
-                                            <ChartPie data={this.props.totalIncomes}/>
+                                            <ChartPie data={this.props.totalIncomes}
+                                            loading={this.props.loading} />
                                         </ChartWrapp>
                                     </>
                                 )
@@ -90,6 +91,7 @@ const mapStateToProps = (state) => {
         signedIn: state.auth.signedIn,
         totalIncomes: state.db.totalIncomes,
         recentActivities: state.db.recentActivities,
+        loading: state.db.loading,
     };
 };
 

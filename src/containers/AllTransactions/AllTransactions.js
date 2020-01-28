@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from '@emotion/styled';
 import Loader from '../../components/ui/Loader/Loader';
+import notFound from '../../img/notfound.svg';
 
 const Wrapper = styled.section`
     margin-left: 12rem;
@@ -17,7 +18,7 @@ const Content = styled.div`
 `;
 
 const Title = styled.h4`
-    font-size: 2.1rem;
+    font-size: 2.5rem;
     text-align: center;
     margin-bottom: 3rem;
 `;
@@ -49,27 +50,53 @@ const TransactionDate = styled.p`
     opacity: .6;
 `;
 
+const Svg = styled.img`
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+`;
+
+const NotFoundWrapp = styled.div`
+    margin: 5rem auto;
+    width: 80%;
+`;
+
+const Message = styled.p`
+    font-size: 1.6rem;
+    text-align: center;
+`;
+
 class AllTransactions extends Component {
     renderTransactionList() {
-        if(!this.props.recentActivities) return <Loader color='bg'
-                                                        size='8'
-                                                        gapTop='10'
-                                                        gapBottom='10'/>;
-        return this.props.recentActivities.map((val) => {
+        if(this.props.loading) {
+            return <Loader color='bg'
+                        size='8'
+                        gapTop='10'
+                        gapBottom='10'/>;
+        } else if(this.props.recentActivities.length === 0) {
             return (
-                <TransactionBox key={val.id}>
-                    <TransactionItem>
-                        <TransactionValue transaction={val.transaction}>
-                            {`${val.transaction === 'Income' ? '+' : '-'} £${val.value}`}
-                        </TransactionValue>
-                        {` - ${val.name}`}
-                    </TransactionItem>
-                    <TransactionDate>
-                        {val.time.toDate().toDateString()}
-                    </TransactionDate>
-                </TransactionBox>
-            )
-        })
+                <NotFoundWrapp>
+                    <Svg src={notFound} />
+                    <Message>No transactions...</Message>
+                </NotFoundWrapp>
+            );
+        } else {
+            return this.props.recentActivities.map((val) => {
+                return (
+                    <TransactionBox key={val.id}>
+                        <TransactionItem>
+                            <TransactionValue transaction={val.transaction}>
+                                {`${val.transaction === 'Income' ? '+' : '-'} £${val.value}`}
+                            </TransactionValue>
+                            {` - ${val.name}`}
+                        </TransactionItem>
+                        <TransactionDate>
+                            {val.time.toDate().toDateString()}
+                        </TransactionDate>
+                    </TransactionBox>
+                )
+            })
+        }
     }
 
     render() {
@@ -87,6 +114,7 @@ class AllTransactions extends Component {
 const mapStateToProps = (state) => {
     return {
         recentActivities: state.db.recentActivities,
+        loading: state.db.loading,
     };
 };
 

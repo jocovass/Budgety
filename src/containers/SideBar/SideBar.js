@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from '@emotion/styled';
 import { app } from '../../config/firebase';
-import { signInSuccees, emailVerified, signOutSuccees } from '../../store/actions/auth';
+import { signInSuccess, emailVerified, signOutSuccess } from '../../store/actions/auth';
 import Login from '../../components/Login/Login';
 import Navigation from '../../components/Navigation/Navigation';
 import Add from '../../components/Add/Add';
@@ -43,13 +43,13 @@ class SideBar extends Component {
             const userName = user.displayName;
             user.getIdToken() 
                 .then(token => {
-                    this.props.signInSuccees(userName, userId, token);
                     if(user.emailVerified) {
                         this.props.emailVerified();
                     }
+                    this.props.signInSuccess(userName, userId, token);
                 });
         } else {
-            this.props.signOutSuccees();
+            this.props.signOutSuccess();
         }
     };
 
@@ -81,4 +81,4 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, 
-                      { signInSuccees, signOutSuccees, emailVerified })(SideBar);
+                      { signInSuccess, signOutSuccess, emailVerified })(SideBar);
