@@ -12,6 +12,10 @@ const Form = styled.form`
     width: 90%;
     margin: 0 auto;
     padding-top: 6rem;
+
+    @media ${props => props.theme.mq.mobile} {
+        padding-top: 5rem;
+    }
 `;
 
 const Row = styled.div`

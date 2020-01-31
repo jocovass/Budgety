@@ -117,16 +117,18 @@ const passRecoveryFinish = () => (
 
 // Create user
 export const createUser = ({ name, email, password }) => dispatch => {
-    dispatch(signIn);
+    dispatch(signIn());
     return app.auth().createUserWithEmailAndPassword(email, password)
         .then(resp => {
             // Updateing the profile with the username and saveing it in our app states.
             resp.user.updateProfile({
                 displayName: name,
             })
-            .then(() => dispatch(signUpSuccess(resp.user.displayName)));
+            .then(() => {
+                dispatch(signUpSuccess(resp.user.displayName))
+            });
             // 1 Send verification email
-            sendVerificationEmail();
+            dispatch(sendVerificationEmail());
         })
         .catch(error => {
             dispatch(signUpFail(error.message));
@@ -174,7 +176,7 @@ export const onSignOut = () => dispatch => {
 // Send verification email to the user
 export const sendVerificationEmail = () => dispatch => {
     const config = {
-        url: `${process.env.PUBLIC_URL}/?email=${app.auth().currentUser.email}`,
+        url: `http://localhost:3000/?email=${app.auth().currentUser.email}`,
         handleCodeInApp: true,
     };
     app.auth().currentUser.sendEmailVerification(config)

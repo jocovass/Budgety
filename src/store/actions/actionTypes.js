@@ -24,3 +24,6 @@ export const ADD_ITEM_SUCCESS = 'ADD_ITEM_SUCCESS';
 export const ADD_ITEM_FAIL = 'ADD_ITEM_FAIL';
 
 export const EMPTY_APP_STATE = 'EMPTY_APP_STATE';
+
+// App state
+export const TOGGLE_MENU = 'TOGGLE_MENU';

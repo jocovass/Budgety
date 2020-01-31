@@ -45,7 +45,7 @@ const Chart = ({ data, loading }) => {
                 anchor: 'bottom',
                 direction: 'column',
                 translateY: 56,
-                translateX: -230,
+                translateX: -200,
                 itemWidth: 100,
                 itemHeight: 18,
                 itemTextColor: '#999',

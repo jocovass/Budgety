@@ -7,12 +7,20 @@ import sprite from '../../img/sprite.svg';
 const Wrapper = styled.div`
     position: absolute;
     top: 2rem;
-    right: 5rem;
+    right: 8rem;
     padding: 2rem;
     border-radius: 5px;
     background-color: var(--clr-secondary);
     display: flex;
     align-items: center;
+
+    @media ${props => props.theme.mq.mobile} {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 0 auto 3rem;
+        width: 32rem;
+    }
 `;
 
 const Title = styled.h4`

@@ -7,6 +7,12 @@ const Row = styled.div`
     position:relative;
     width: 100%;
     margin-bottom: 3rem;
+
+    @media ${props => props.theme.mq['tablet-land']} {
+        width: 85%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 `;
     
     const Input = styled.input`
@@ -18,7 +24,7 @@ const Row = styled.div`
     border: 2px solid transparent;
     border-color: ${props => props.isError ? `var(--clr-error)` : `transparent`};
     border-radius: 100px;
-    padding-left: 50px;
+    padding-left: 5rem;
     outline: none;
 `;
 
@@ -100,8 +106,9 @@ const RadioDot = styled.span`
     &::after {
         content: '';
         position: absolute;
-        top: 5px;
-        left: 5px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 1rem;
         height: 1rem;
         border-radius: 50%;

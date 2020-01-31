@@ -50,11 +50,16 @@ function calcTotals(data, appState) {
             totalBudget: appState.totalBudget + +data.money,
             totalIncome: appState.totalIncome + +data.money,
             totalCosts: {...appState.totalCosts},
+            totalIncomes: {
+                ...appState.totalIncomes,
+                [data.select]: appState.totalIncomes[data.select] + +data.money,
+            },
         }
     } else {
         return {
             totalBudget: appState.totalBudget - +data.money,
             totalExpense: appState.totalExpense + +data.money,
+            totalIncomes: {...appState.totalIncomes},
             totalCosts: {
                 ...appState.totalCosts,
                 [data.select]: appState.totalCosts[data.select] + +data.money,
@@ -186,6 +191,7 @@ const mapStateToProps = (state) => {
             totalIncome: state.db.totalIncome,
             totalExpense: state.db.totalExpense,
             totalCosts: state.db.totalCosts,
+            totalIncomes: state.db.totalIncomes,
             recentActivities: state.db.recentActivities,
             years: state.db.years,
         },

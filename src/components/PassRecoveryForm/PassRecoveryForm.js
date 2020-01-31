@@ -47,8 +47,8 @@ const Strong = styled.strong`
 
 const BackButton = styled.button`
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 2rem;
+    left: 2rem;
     width: 2.5rem;
     height: 2.5rem;
     transition: opacity .2s ease-in-out;
@@ -57,7 +57,7 @@ const BackButton = styled.button`
     &:hover {
         opacity: 1;
     }
-    `;
+`;
     
 const Svg = styled.svg`
     fill: var(--clr-secondary);

@@ -9,18 +9,30 @@ import ChartPie from '../../components/Chart/ChartPie';
 const Wrapper = styled.main`
     margin-left: 12rem;
     color: var(--clr-primary);
-    padding: 2rem 0;
+    padding: 2rem;
+
+    @media ${props => props.theme.mq.tablet} {
+        margin-left: 0;
+    }
 `;
 
 const FlexRow = styled.div`
     display: flex;
     margin-bottom: 3rem;
+    
+    @media ${props => props.theme.mq['tablet-land']} {
+        flex-direction: column;
+    }
 `;
 
 const ChartWrapp = styled.div`
     width: 90%;
-    height: 500px;
+    height: 50rem;
     margin: 1rem auto;
+
+    @media ${props => props.theme.mq.tablet} {
+        min-width: 80rem;
+    }
 `;
 
 const Title = styled.h3`
@@ -61,6 +73,7 @@ class Expense extends Component {
             return (
                 <Wrapper>
                     <FlexRow>
+                        <RecentActivities data={selectExpenses(this.props.recentActivities || [])} />
                         <Summary>
                             { () => {
                                 return (
@@ -74,7 +87,6 @@ class Expense extends Component {
                                 )
                             }}
                         </Summary>
-                        <RecentActivities data={selectExpenses(this.props.recentActivities || [])} />
                     </FlexRow>
                 </Wrapper>
             )

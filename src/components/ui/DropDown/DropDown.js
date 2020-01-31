@@ -3,19 +3,23 @@ import styled from '@emotion/styled';
 
 const Wrapper = styled.div`
     position: absolute;
-    top: 20px;
-    right: 40px;
+    top: ${props => props.pos.top};
+    right: ${props => props.pos.right};
     border-radius: 10px;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
 `;
 
 const Arrow = styled.span`
-    font-size: 25px;
+    font-size: 2.5rem;
     position: absolute;
     top: 0px;
     right: 7px;
     pointer-events: none;
     color: var(--clr-secondary);
+     @media ${props => props.theme.mq.mobile} {
+         top: 1px;
+         right: 9px;
+     }
 `;
 
 const Select = styled.select`
@@ -48,7 +52,7 @@ const InputError = styled.span`
 `;
 
 
-const DropDown = ({ opt, clr = 'secondary', isError, message, ...props}) => {
+const DropDown = ({ opt, clr = 'secondary', isError, message, positions = {top: '2rem', right: '2rem' }, ...props}) => {
 
     function renderDates() {
         return opt.map(function createOpt(value, index) {
@@ -58,7 +62,7 @@ const DropDown = ({ opt, clr = 'secondary', isError, message, ...props}) => {
     }
 
     return (
-        <Wrapper>
+        <Wrapper pos={positions}>
             <Arrow>&#x025BE;</Arrow>
             <Select clr={clr} {...props} isError={isError}>
                 <Option value="">Select ...</Option>

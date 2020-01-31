@@ -25,6 +25,7 @@ function authReducer(state = INITIAL_STAT, action) {
         case actionTypes.SIGN_OUT_SUCCESS: return updateState(state, action.payload);
         case actionTypes.SIGN_UP_SUCCESS : return updateState(state, action.payload);
         case actionTypes.SIGN_UP_FAIL: return updateState(state, action.payload);
+        case actionTypes.EMAIL_VERIFIED: return updateState(state, action.payload);
         case actionTypes.PASS_RECOVERY_START: return updateState(state, action.payload);
         case actionTypes.PASS_RECOVERY_FINISH: return updateState(state, action.payload);
         default: return state;

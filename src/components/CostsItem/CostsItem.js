@@ -5,7 +5,12 @@ const Wrapper = styled.div`
     width: 40%;
     display: inline-block;
     margin: 0 2rem 2rem;
-    `;
+
+    @media ${props => props.theme.mq.mobile} {
+        widtH: 100%;
+        margin: 0 0 2rem;
+    }
+`;
     
     const Title = styled.p`
     font-size: 1.6rem;
@@ -52,6 +57,10 @@ const Value = styled.p`
     position: absolute;
     top: 6px;
     left: 50%;
+
+    @media ${props => props.theme.mq.mobile} {
+        top: 4px;
+    }
 `;
 
 const CostsItem = ({ name, value }) => {

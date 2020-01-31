@@ -11,8 +11,10 @@ const theme = {
         error: '#B3001B',
     },
     mq: {
-        phone: 'only screen and (max-width: 45em)',
-        tablet: 'only screen and (max-width: 30em)',
+        laptop: 'only screen and (max-width: 87.5em)', // 1400px
+        'tablet-land': 'only screen and (max-width: 62.5em)', // 1000px
+        tablet: 'only screen and (max-width: 50em)', // 800px
+        mobile: 'only screen and (max-width: 34.5em)', // 550px
     }
 };
 

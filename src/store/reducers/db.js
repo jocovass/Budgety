@@ -7,9 +7,9 @@ const INITIAL_STATE = {
     totalIncome: 0,
     totalExpense: 0,
     totalIncomes: {
-        salary: 2296,
-        gift: 2,
-        win: 430,
+        salary: 0,
+        gift: 0,
+        win: 0,
     },
     totalCosts: {
         groceries: 0,

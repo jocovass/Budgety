@@ -5,6 +5,10 @@ const Wrapper = styled.footer`
     margin-left: 12rem;
     text-align: center;
     padding: 8px;
+
+    @media ${props => props.theme.mq.tablet} {
+        margin-left: 0;
+    }
 `;
 
 const Text = styled.p`

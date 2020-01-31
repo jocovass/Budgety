@@ -6,14 +6,20 @@ import notFound from '../../img/notfound.svg';
 
 const Wrapper = styled.section`
     margin-left: 12rem;
+    margin-top: 3rem;
+
+    @media ${props => props.theme.mq.tablet} {
+        margin-left: 0;
+    }
 `;
 
 const Content = styled.div`
+    width: 90%;
+    max-width: 700px;
     background-color: var(--clr-secondary);
     border-radius: 10px;
     padding: 2rem 1rem;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, .1);
-    width: 60%;
     margin: 0 auto;
 `;
 

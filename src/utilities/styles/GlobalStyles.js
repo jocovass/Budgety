@@ -11,7 +11,7 @@ const makeGlobalStyles = theme => (
         }
 
         html {
-            font-size: 62%; // set the root fontsize to 10px
+            font-size: 62.5%; // set the root fontsize to 10px
             --clr-bg: ${theme.colors.background};
             --clr-primary: ${theme.colors.primary};
             --clr-primary-light: ${theme.colors['primary-light']};
@@ -22,6 +22,18 @@ const makeGlobalStyles = theme => (
             --clr-success: ${theme.colors.success};
             --clr-income: ${theme.colors.income};
             --clr-expense: ${theme.colors.expense};
+
+            @media ${theme.mq.laptop} {
+                font-size: 56.25%;
+            }
+
+            @media ${theme.mq['tablet-land']} {
+                font-size: 50%;
+            }
+
+            @media ${theme.mq.mobile} {
+                font-size: 43.5%;
+            }
         }
 
         body {

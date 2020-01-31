@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from '@emotion/styled';
 import { app } from '../../config/firebase';
 import { signInSuccess, emailVerified, signOutSuccess } from '../../store/actions/auth';
+import { toggleMenu } from '../../store/actions/app';
 import Login from '../../components/Login/Login';
 import Navigation from '../../components/Navigation/Navigation';
 import Add from '../../components/Add/Add';
@@ -23,6 +24,12 @@ const Wrapper = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 5;
+    transition: transform .15s ease-in-out;
+
+    @media ${props => props.theme.mq.tablet} {
+        transform: ${props => props.open ? `translateX(0%)` : `translateX(-100%)`};
+    }
 `;
 
 class SideBar extends Component {
@@ -53,6 +60,12 @@ class SideBar extends Component {
         }
     };
 
+    toggle = (e) => {
+        if(e.target.closest('section > button') || e.target.closest('a')) {
+           this.props.toggleMenu(!this.props.menuIsOpen);
+        }
+    }
+
     renderBtn() {
         if(this.props.signedIn === null) {
             return <Loader size="5" />
@@ -65,7 +78,7 @@ class SideBar extends Component {
 
     render() {
         return (
-            <Wrapper>
+            <Wrapper open={this.props.menuIsOpen} onClick={this.toggle}>
                 {this.renderBtn()}
                 <Navigation />
                 <Add />
@@ -77,8 +90,9 @@ class SideBar extends Component {
 const mapStateToProps = (state) => {
     return {
         signedIn: state.auth.signedIn,
+        menuIsOpen: state.app.menuIsOpen,
     };
 };
 
 export default connect(mapStateToProps, 
-                      { signInSuccess, signOutSuccess, emailVerified })(SideBar);
+                      { signInSuccess, signOutSuccess, emailVerified, toggleMenu })(SideBar);

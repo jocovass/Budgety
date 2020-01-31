@@ -11,13 +11,23 @@ import DropDown from '../../components/ui/DropDown/DropDown';
 
 const Wrapper = styled.main`
     margin-left: 12rem;
+    padding: 2rem 1rem;
     color: var(--clr-primary);
-    padding: 2rem 0;
+    overflow: hidden;
+    
+    @media ${props => props.theme.mq.tablet} {
+        padding: 2rem;
+        margin: 0;
+    }
 `;
 
 const FlexRow = styled.div`
     display: flex;
     margin-bottom: 3rem;
+
+    @media ${props => props.theme.mq['tablet-land']} {
+        flex-direction: column;
+    }
 `;
 
 const Title = styled.h3`
@@ -26,9 +36,14 @@ const Title = styled.h3`
 `;
 
 const ChartWrapp = styled.div`
-    width: 90%;
-    height: 500px;
+    position: relative;
+    width: 98%;
+    height: 50rem;
     margin: 1rem auto;
+
+    @media ${props => props.theme.mq.tablet} {
+        min-width: 80rem;
+    }
 `;
 
 function formData(data) {
@@ -47,14 +62,16 @@ class MainContent extends Component {
 
         return (
             <FlexRow>
+                <RecentActivities data={this.props.recentActivities} />
                 <Summary>
                     {
                     () => {
                         return (
                             <>
                                 <Title>Summary Of Your Balance</Title>
-                                <DropDown opt={formData(this.props.years)}/>
                                 <ChartWrapp>
+                                    <DropDown opt={formData(this.props.years)}
+                                              positions={{top: '-6.5rem', right: '2rem'}}/>
                                     <ChartLine data={this.props.years} 
                                     year={this.props.selectedYear}
                                     loading={this.props.loading} />
@@ -64,7 +81,6 @@ class MainContent extends Component {
                     }
                     }
                 </Summary>
-                <RecentActivities data={this.props.recentActivities} />
             </FlexRow>
         )
     }
