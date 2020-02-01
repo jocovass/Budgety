@@ -18,20 +18,4 @@ const config = {
 const app = firebase.initializeApp(config);
 const db = app.firestore();
 
-// var docRef = db.collection('users').doc('joco');
-
-// var getOptions = {
-//     source: 'default',
-// };
-
-// docRef.get(getOptions).then((doc) => {
-//     // if(doc.exists) {
-//         console.log('Cached document data:', doc.data());
-//     // } else {
-//     //     console.log('No such document!');
-//     // }
-// }).catch((error) => {
-//     console.log('Error getting cached document:', error);
-// })
-
 export { app, db };

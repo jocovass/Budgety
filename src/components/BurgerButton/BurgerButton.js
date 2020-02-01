@@ -4,15 +4,13 @@ import styled from '@emotion/styled';
 import { toggleMenu } from '../../store/actions/app';
 
 const Wrapper = styled.div`
-    display: none;
-
-    @media ${props => props.theme.mq.tablet} {
+    
         display: block;
         position: absolute;
         top: 25px;
         right: 15px;
         cursor: pointer;
-    }
+    
 `;
 
 const Bar = styled.div`

@@ -66,12 +66,12 @@ class Layout extends Component {
                                                 timeout={this.state.timeout} />
                                         : null}
                     <SideBar />
-                    <Route path="/" component={Header}/>
+                    <Header />
                     <Switch>
-                        <Route path="/" exact component={MainContent}/>
-                        <Route path="/income" component={Income}/>
-                        <Route path="/expense" component={Expense}/>
-                        <Route path="/transactions" component={AllTransactions}/>
+                        <Route path={process.env.PUBLIC_URL + '/'} exact component={MainContent}/>
+                        <Route path={process.env.PUBLIC_URL + '/income'} component={Income}/>
+                        <Route path={process.env.PUBLIC_URL + '/expense'} component={Expense}/>
+                        <Route path={process.env.PUBLIC_URL + '/transactions'} component={AllTransactions}/>
                     </Switch>
                 </StickyFooter>
                 <Footer />
