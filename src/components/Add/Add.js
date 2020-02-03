@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import asyncComp from '../../containers/hoc/asyncComp/asyncComp';
 import AddButton from './AddButton/AddButton';
 import Modal from '../Modal/Modal';
-import NewItemForm from '../NewItemForm/NewItemForm';
+const NewItemForm = asyncComp(() => {
+    return import(/* webpackPrefetch: true */'../NewItemForm/NewItemForm');
+});
 
 const Add = () => {
     const [open, setOpen] = useState(false);

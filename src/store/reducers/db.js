@@ -36,6 +36,7 @@ const dbReducer = (state = INITIAL_STATE, action) => {
         case actionTypes.GET_USER_DATA: return updateState(state, action.payload);
         case actionTypes.GET_USER_DATA_SUCCESS: return updateState(state, action.payload);
         case actionTypes.GET_USER_DATA_FAIL: return updateState(state, action.payload);
+        case actionTypes.UPDATE_SELECTED_YEAR: return updateState(state, action.payload);
         case actionTypes.EMPTY_APP_STATE: return updateState(state, action.payload);
         default: return state;
     }

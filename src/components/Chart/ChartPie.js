@@ -3,11 +3,15 @@ import { ResponsivePie } from '@nivo/pie';
 import Loader from '../ui/Loader/Loader';
 
 function formateData(data) {
-  return Object.entries(data).map((val, index) => {
+   const values = Object.entries(data).filter((val, index) => {
+      return val[1] !== 0;
+  });
+
+  return values.map((val, index) => {
     return {
-      id: val[0],
-      label: val[0],
-      value: val[1],
+        id: val[0],
+        label: val[0],
+        value: val[1],
     }
   });
 }

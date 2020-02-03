@@ -19,7 +19,7 @@ const Wrapper = styled.section`
     background-color: var(--clr-bg);
     padding: 3rem 0;
     text-align: center;
-    box-shadow: inset 5px 5px 20px rgba(250, 250, 250, .1),
+    box-shadow: inset 1px 1px 10px rgba(250, 250, 250, .1),
                 5px 5px 15px rgba(0, 0, 0, .3);
     display: flex;
     flex-direction: column;

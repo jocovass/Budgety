@@ -7,13 +7,13 @@ import TotalCosts from '../../components/TotalCosts/TotalCosts';
 import ChartLine from '../../components/Chart/ChartLine';
 import Advert from '../../components/Advert/Advert';
 import DropDown from '../../components/ui/DropDown/DropDown';
+import { updateSelectedYear } from '../../store/actions/db';
 
 
 const Wrapper = styled.main`
     margin-left: 12rem;
     padding: 2rem 1rem;
     color: var(--clr-primary);
-    overflow: hidden;
     
     @media ${props => props.theme.mq.tablet} {
         padding: 2rem;
@@ -71,7 +71,8 @@ class MainContent extends Component {
                                 <Title>Summary Of Your Balance</Title>
                                 <ChartWrapp>
                                     <DropDown opt={formData(this.props.years)}
-                                              positions={{top: '-6.5rem', right: '2rem'}}/>
+                                              positions={{top: '-6.5rem', right: '2rem'}}
+                                              change={this.props.updateSelectedYear}/>
                                     <ChartLine data={this.props.years} 
                                     year={this.props.selectedYear}
                                     loading={this.props.loading} />
@@ -105,4 +106,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(MainContent);
+export default connect(mapStateToProps, { updateSelectedYear })(MainContent);

@@ -84,6 +84,16 @@ export const emptyAppState = () => (
     }
 );
 
+export const updateSelectedYear = (selectedYear) => {
+    console.log(selectedYear)
+    return {
+        type: actionTypes.UPDATE_SELECTED_YEAR,
+        payload: {
+            selectedYear,
+        }
+    }
+};
+
 // When the user is logged in we listen for all it's data
 export const listenForUserData = (userId) => (dispatch) => {
     dispatch(getUserData());

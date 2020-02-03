@@ -8,10 +8,19 @@ import SideBar from '../../SideBar/SideBar';
 import history from '../../../history';
 import Header from '../../Header/Header';
 import MainContent from '../../MainContent/MainContent';
-import Income from '../../Income/Income';
-import Expense from '../../Expense/Expense';
 import Footer from '../../../components/Footer/Footer';
-import AllTransactions from '../../AllTransactions/AllTransactions';
+import asyncComp from '../asyncComp/asyncComp';
+const Income = asyncComp(() => {
+    return import(/* webpackPrefetch: true */'../../Income/Income');
+});
+
+const Expense = asyncComp(() => {
+    return import(/* webpackPrefetch: true */'../../Expense/Expense');
+});
+
+const AllTransactions = asyncComp(() => {
+    return import(/* webpackPrefetch: true */'../../AllTransactions/AllTransactions');
+});
 
 const Wrapper = styled.div`
     max-width: 1600px;

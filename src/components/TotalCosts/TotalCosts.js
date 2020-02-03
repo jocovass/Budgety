@@ -9,7 +9,7 @@ const Wrapper = styled.div`
     border-radius: 10px;
     padding: 3rem 2rem 2rem;
     margin: 0 auto;
-    width: 97%;
+    width: 100%;
 `;
 
 const Title = styled.h3`

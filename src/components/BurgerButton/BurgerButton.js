@@ -4,21 +4,24 @@ import styled from '@emotion/styled';
 import { toggleMenu } from '../../store/actions/app';
 
 const Wrapper = styled.div`
-    
-        display: block;
-        position: absolute;
-        top: 25px;
-        right: 15px;
-        cursor: pointer;
-    
+    display: block;
+    position: absolute;
+    top: 25px;
+    right: 15px;
+    width: 4rem;
+    height: 2.4rem;
+    cursor: pointer;
 `;
 
 const Bar = styled.div`
-position: relative;
+    position: absolute;
+    top: 42%;
+    left: 0;
     width: 4rem;
     height: .5rem;
     background-color: var(--clr-primary);
-    transform: ${props => props.open ? `rotate(-45deg)` : `rotateX(0deg)`};
+    transform-origin: center;
+    transform: ${props => props.open ? `rotate(-45deg)` : `rotate(0deg)`};
     transition: transform .15s ease-in-out;
 
     &::after,
@@ -37,7 +40,7 @@ position: relative;
     }
 
     &::after {
-        bottom: ${props => props.open ? `-1px` : `-7px`};
+        bottom: ${props => props.open ? `0px` : `-7px`};
         transform: ${props => props.open ? `rotate(90deg)` : `rotateX(0deg)`};
     }
 `;

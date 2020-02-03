@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import asyncComp from '../../containers/hoc/asyncComp/asyncComp';
 import Button from '../ui/Button/Button';
 import Modal from '../Modal/Modal';
-import Forms from '../Forms/Forms';
+const Forms = asyncComp(() => {
+   return import(/* webpackPrefetch: true */'../Forms/Forms');
+})
 
 const Login = () => {
    const [open, setOpen] = useState(false);

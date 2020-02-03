@@ -40,19 +40,8 @@ const Option = styled.option`
     background-color: red;
 `;
 
-const InputError = styled.span`
-    color: var(--clr-error);
-    font-size: 1.4rem;
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 104%;
-    width: 100%;
-    text-align: center;
-`;
 
-
-const DropDown = ({ opt, clr = 'secondary', isError, message, positions = {top: '2rem', right: '2rem' }, ...props}) => {
+const DropDown = ({ opt, clr = 'secondary', change, positions = {top: '2rem', right: '2rem' }}) => {
 
     function renderDates() {
         return opt.map(function createOpt(value, index) {
@@ -64,11 +53,10 @@ const DropDown = ({ opt, clr = 'secondary', isError, message, positions = {top: 
     return (
         <Wrapper pos={positions}>
             <Arrow>&#x025BE;</Arrow>
-            <Select clr={clr} {...props} isError={isError}>
-                <Option value="">Select ...</Option>
+            <Select clr={clr} onChange={(e) => change(e.target.value)}>
+                <Option value="">Select...</Option>
                 {renderDates()}
             </Select>
-            {isError ? <InputError>{message}</InputError> : null}
         </Wrapper>
     );
 };
