@@ -1,6 +1,6 @@
 # Budgety
 
-### [Check out online](https://wonderful-leavitt-c2650c.netlify.com).
+### [Check out online](https://lucid-bassi-5d0ceb.netlify.com/).
 
 It is a ReactJs application created with the `create-react-app` command.
 
