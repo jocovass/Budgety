@@ -36,17 +36,12 @@ const Select = styled.select`
     text-transform: capitalize;
 `;
 
-const Option = styled.option`
-    background-color: red;
-`;
-
-
 const DropDown = ({ opt, clr = 'secondary', change, positions = {top: '2rem', right: '2rem' }}) => {
 
     function renderDates() {
         return opt.map(function createOpt(value, index) {
-            
-            return <Option value={value} key={value}>{value}</Option>;
+
+            return <option value={value} key={value}>{value}</option>;
         });
     }
 
@@ -54,7 +49,7 @@ const DropDown = ({ opt, clr = 'secondary', change, positions = {top: '2rem', ri
         <Wrapper pos={positions}>
             <Arrow>&#x025BE;</Arrow>
             <Select clr={clr} onChange={(e) => change(e.target.value)}>
-                <Option value="">Select...</Option>
+                <option value="">Select...</option>
                 {renderDates()}
             </Select>
         </Wrapper>

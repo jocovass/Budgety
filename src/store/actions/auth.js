@@ -52,7 +52,6 @@ const signOutFail = (error) => (
 );
 
 const signUpSuccess = (userName) => {
-    console.log('signup');
     return {
         type: actionTypes.SIGN_UP_SUCCESS,
         payload: {
@@ -65,8 +64,8 @@ export const signInSuccess = (userName, userId, token) => (
     {
         type: actionTypes.SIGN_IN_SUCCESS,
         payload: {
-            userName, 
-            userId, 
+            userName,
+            userId,
             token,
             loading: false,
             signedIn: true,
@@ -180,7 +179,7 @@ export const sendVerificationEmail = () => dispatch => {
         handleCodeInApp: true,
     };
     app.auth().currentUser.sendEmailVerification(config)
-        .catch(error => console.log(error));
+        .catch(error => console.warn(error));
 };
 
 // Send password recovery email to the users email

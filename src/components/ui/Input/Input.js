@@ -13,8 +13,8 @@ const Row = styled.div`
         margin-right: auto;
     }
 `;
-    
-    const Input = styled.input`
+
+const Input = styled.input`
     height: 4.5rem;
     width: 100%;
     font-size: 1.6rem;
@@ -23,15 +23,15 @@ const Row = styled.div`
     border: 2px solid transparent;
     border-color: ${props => props.isError ? `var(--clr-error)` : `transparent`};
     border-radius: 100px;
-    padding-left: 5rem;
+    padding-left: 5.5rem;
     outline: none;
 `;
 
 const Label = styled.label`
     color: var(--clr-secondary);
     position: absolute;
-    top: 1rem;
-    left: 1.5rem;
+    top: 1.2rem;
+    left: 2rem;
 `;
 
 const Svg = styled.svg`
@@ -54,21 +54,19 @@ const InputError = styled.span`
 const renderInput = ({input, type, label, id, meta: {touched, error}}) => {
     const isError = touched && error ? true : false;
     return (
-        <>
-            <Row>
-                <Input {...input}
-                    type={type}
-                    id={id}
-                    isError={isError}
-                    autoComplete="off" />
-                <Label htmlFor={input.name}>
-                    <Svg role="button" aria-labelledby="title desc" isError={isError}>
-                        <use xlinkHref={`${sprite}#icon-${label}`}></use>
-                    </Svg>
-                </Label>
-            {touched && error ? <InputError>{error}</InputError> : null}
-            </Row>
-        </>
+        <Row>
+            <Input {...input}
+                type={type}
+                id={id}
+                isError={isError}
+                autoComplete="off" />
+            <Label htmlFor={input.name}>
+                <Svg role="button" aria-labelledby="title desc" isError={isError}>
+                    <use xlinkHref={`${sprite}#icon-${label}`}></use>
+                </Svg>
+            </Label>
+        {touched && error ? <InputError>{error}</InputError> : null}
+        </Row>
     );
 };
 
@@ -173,7 +171,7 @@ const DropDown = ({ opt, clr = 'secondary', isError, message, positions = {top: 
 
     function renderDates() {
         return opt.map(function createOpt(value, index) {
-            
+
             return <Option value={value} key={value}>{value}</Option>;
         });
     }

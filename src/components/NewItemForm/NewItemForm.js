@@ -97,14 +97,13 @@ function calcSummary(data, years, time) {
     } else {
         y[time.getMonth()].Expense += +data.money;
     }
-    
+
     return y;
 }
 
 let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appState, close, userId, error, transaction }) => {
     const [select, setSelect] = useState('Income');
     const onSubmit = (data) => {
-        console.log(data)
         if(userId) {
             const currentTime = new Date();
             const totals = calcTotals(data, appState);
@@ -134,7 +133,7 @@ let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appSt
             <Title>Add a new item</Title>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 {error && <Strong>{error}</Strong>}
-                <Field name="select" 
+                <Field name="select"
                     component={renderDropdown}
                     select={select} />
                 <Field name="money"
@@ -162,10 +161,10 @@ let NewItemForm = ({ handleSubmit, submitting, pristine, reset, onAddItem, appSt
                         setSelect={setSelect}/>
                 </Row>
                 <Row>
-                    <Button value="Add" 
+                    <Button value="Add"
                             margin="0 2rem 0 0"
                             disabled={submitting} />
-                    <Button value="Clear" 
+                    <Button value="Clear"
                             margin="0 2rem 0 0"
                             disabled={pristine || submitting}
                             click={reset} />

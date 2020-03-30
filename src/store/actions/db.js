@@ -60,7 +60,7 @@ const addItemFail = (error) => (
 );
 
 export const emptyAppState = () => (
-    {   
+    {
         type: actionTypes.EMPTY_APP_STATE,
         payload: {
             loading: false,
@@ -80,12 +80,11 @@ export const emptyAppState = () => (
             recentActivities: [],
             years: {},
             error: null,
-        }  
+        }
     }
 );
 
 export const updateSelectedYear = (selectedYear) => {
-    console.log(selectedYear)
     return {
         type: actionTypes.UPDATE_SELECTED_YEAR,
         payload: {
