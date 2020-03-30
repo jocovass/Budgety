@@ -139,13 +139,12 @@ const Wrapper = styled.div`
 const Arrow = styled.span`
     font-size: 2.5rem;
     position: absolute;
-    top: 0px;
-    right: 7px;
+    top: 1px;
+    right: 10px;
     pointer-events: none;
     color: var(--clr-secondary);
      @media ${props => props.theme.mq.mobile} {
-         top: 1px;
-         right: 9px;
+         top: 3px;
      }
 `;
 
@@ -163,16 +162,12 @@ const Select = styled.select`
     text-transform: capitalize;
 `;
 
-const Option = styled.option`
-    background-color: red;
-`;
-
 const DropDown = ({ opt, clr = 'secondary', isError, message, positions = {top: '2rem', right: '2rem' }, ...props}) => {
 
     function renderDates() {
         return opt.map(function createOpt(value, index) {
 
-            return <Option value={value} key={value}>{value}</Option>;
+            return <option value={value} key={value}>{value}</option>;
         });
     }
 
@@ -180,7 +175,7 @@ const DropDown = ({ opt, clr = 'secondary', isError, message, positions = {top: 
         <Wrapper pos={positions}>
             <Arrow>&#x025BE;</Arrow>
             <Select clr={clr} {...props} isError={isError}>
-                <Option value="">Select ...</Option>
+                <option value="">Select ...</option>
                 {renderDates()}
             </Select>
             {isError ? <InputError>{message}</InputError> : null}
