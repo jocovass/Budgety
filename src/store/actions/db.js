@@ -110,6 +110,7 @@ export const onAddItem = (data, userId) => (dispatch) => {
     dispatch(addItem());
 
     const userRef = db.collection('users').doc(userId);
+    console.log(userRef)
     userRef.set(data, { merge: true })
         .then(resp => dispatch(addItemSuccess()))
         .catch(error => dispatch(addItemFail(error)));

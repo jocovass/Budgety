@@ -42,7 +42,7 @@ const Amount = styled.p`
 const TtotalIncome = ({ value, title, clr = 'bg' }) => (
     <Wrapper>
         <Title>Total {title}:</Title>
-        <Amount clr={clr}>£ {value}</Amount>
+        <Amount clr={clr}>£ {value.toFixed(2)}</Amount>
     </Wrapper>
 );
 
