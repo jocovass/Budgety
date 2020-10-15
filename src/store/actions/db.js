@@ -67,6 +67,11 @@ export const emptyAppState = () => (
             totalBudget: 0,
             totalIncome: 0,
             totalExpense: 0,
+            totalIncomes: {
+                gift: 0,
+                salary: 0,
+                win: 0,
+            },
             totalCosts: {
                 groceries: 0,
                 pet: 0,
@@ -101,6 +106,7 @@ export const listenForUserData = (userId) => (dispatch) => {
     return userRef.onSnapshot(
         (doc) => {
             dispatch(getUserDataSuccess(doc.data()));
+
         }, (error) => dispatch(getUserDataFail(error))
     );
 };
